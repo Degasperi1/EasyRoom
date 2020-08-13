@@ -5,6 +5,8 @@
  */
 package easyroom;
 
+import view.Tela1;
+
 /**
  *
  * @author Degasperi
@@ -15,7 +17,8 @@ public class EasyRoom {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Tela1 tela = new Tela1();
+        tela.setVisible(true);
     }
     
 }
