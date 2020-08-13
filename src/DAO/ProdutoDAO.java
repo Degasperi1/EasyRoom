@@ -31,6 +31,20 @@ public class ProdutoDAO extends Dao<Produto> {
         }
         return null;
     }
+    public List<Produto> findAllByDescription(String criteria){
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        List<Produto> produtos = null;
+        try {
+            produtos = sessao.createQuery("from Produto p WHERE ds_produto LIKE '%"+criteria+"%'")
+                    .getResultList();
+            return produtos;
+        } catch (HibernateException hibEx) {
+            hibEx.printStackTrace();
+        } finally {
+            sessao.close();
+        }
+        return null;
+    }
 
     public List<Produto> findAll() {
         Session sessao = HibernateUtil.getSessionFactory().openSession();

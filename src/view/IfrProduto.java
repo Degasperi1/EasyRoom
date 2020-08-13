@@ -5,17 +5,32 @@
  */
 package view;
 
+import DAO.ProdutoDAO;
+import Entidade.Produto;
+import TableModel.ProdutoTableModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 /**
  *
  * @author evand
  */
 public class IfrProduto extends javax.swing.JInternalFrame {
 
+    ProdutoTableModel tableModel = new ProdutoTableModel();
+    int idproduto = 0;
+
     /**
      * Creates new form ifrProduto
      */
     public IfrProduto() {
         initComponents();
+        //personalizando a jtable
+        //aplica o modelo
+        tblProduto.setModel(tableModel);
+        //EXPERIMENTAL
+        tblProduto.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
     }
 
     /**
@@ -44,7 +59,7 @@ public class IfrProduto extends javax.swing.JInternalFrame {
         tfdBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
         btnExcluir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
@@ -66,6 +81,11 @@ public class IfrProduto extends javax.swing.JInternalFrame {
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/save-30.png"))); // NOI18N
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
         jLabel5.setText("Campos marcados com '*' são de preenchimento obrigatório.");
@@ -127,8 +147,13 @@ public class IfrProduto extends javax.swing.JInternalFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/search-30.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -139,13 +164,18 @@ public class IfrProduto extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblProduto);
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/delete-30.png"))); // NOI18N
         btnExcluir.setText("Excluir");
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/edit-30.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlConsultarLayout = new javax.swing.GroupLayout(pnlConsultar);
         pnlConsultar.setLayout(pnlConsultarLayout);
@@ -235,15 +265,65 @@ public class IfrProduto extends javax.swing.JInternalFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         if (pnlProduto.getSelectedIndex() == 0) {
             limpaCampos();
-        }else{
+        } else {
             pnlProduto.setSelectedIndex(0);
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void limpaCampos(){
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (validaCampos()) {
+            ProdutoDAO dao = new ProdutoDAO();
+            Produto p = new Produto();
+            p.setDs_produto(txaDescricao.getText());
+            p.setVl_venda(Double.parseDouble(tffValor.getText()));
+            p.setId_usuario_cadastro(1); // ID = 1 (admin)
+            p.setIe_situacao('A'); //A = Ativa
+            if (idproduto == 0) {
+                dao.save(p);
+            } else {
+                dao.update(p);
+            }
+            this.tableModel.updateData();
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        if (tblProduto.getSelectedRow() != -1) {
+            this.idproduto = (int) tableModel.getValueAt(tblProduto.getSelectedRow(), 0);
+            tfdMostraId.setText(String.valueOf(idproduto));
+            txaDescricao.setText(String.valueOf(tableModel.getValueAt(tblProduto.getSelectedRow(), 1)));
+            tffValor.setText(String.valueOf(tableModel.getValueAt(tblProduto.getSelectedRow(), 2)));
+
+            //retorna à aba de cadastro
+            pnlProduto.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um produto para editar.", "Verifique a seleção!", JOptionPane.WARNING_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        this.tableModel.updateData(tfdBuscar.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void limpaCampos() {
+        tfdMostraId.setText("");
         txaDescricao.setText("");
         tffValor.setText("");
     }
+
+    private boolean validaCampos() {
+        boolean valido = true;
+        if (txaDescricao.getText().length() == 0 || tffValor.getText().length() == 0) {
+            valido = false;
+            JOptionPane.showMessageDialog(null, "Os campos não podem estar vazios.", "Verifique os campos!", JOptionPane.WARNING_MESSAGE);
+        } else if (Double.parseDouble(tffValor.getText()) < 0) {
+            valido = false;
+            JOptionPane.showMessageDialog(null, "O valor precisa ser maior ou igual a zero", "Verifique os campos!", JOptionPane.WARNING_MESSAGE);
+        }
+        return valido;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -260,13 +340,14 @@ public class IfrProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnlCadastrar;
     private javax.swing.JPanel pnlConsultar;
     private javax.swing.JTabbedPane pnlProduto;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JTextField tfdBuscar;
     private javax.swing.JTextField tfdMostraId;
     private javax.swing.JFormattedTextField tffValor;
     private javax.swing.JTextArea txaDescricao;
     // End of variables declaration//GEN-END:variables
+
 }

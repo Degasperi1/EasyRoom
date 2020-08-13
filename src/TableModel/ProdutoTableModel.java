@@ -24,8 +24,11 @@ public class ProdutoTableModel extends AbstractTableModel {
         updateData();
     }
 
-    private void updateData() {
+    public void updateData() {
         this.dados = new ProdutoDAO().findAll();       
+    }
+    public void updateData(String busca){
+        this.dados = new ProdutoDAO().findAllByDescription(busca);
     }
 
     @Override
