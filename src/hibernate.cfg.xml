@@ -11,5 +11,9 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">postgres</property>
         <mapping class="Entidade.Produto"/>
+        <mapping class="Entidade.Cidade"/>
+        <mapping class="Entidade.Estado"/>
+        <mapping class="Entidade.Entidade"/>
+        <mapping class="Entidade.PessoaFisica"/>
     </session-factory>
 </hibernate-configuration>
