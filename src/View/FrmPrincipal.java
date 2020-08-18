@@ -21,7 +21,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         getContentPane().setBackground(new Color(238, 107, 38));      
-        //makeFullScreen();     
+        //makeFullScreen();
+        setExtendedState(FrmPrincipal.MAXIMIZED_BOTH);
         
     }
     
@@ -46,6 +47,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         pnlLogo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -54,10 +56,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnPessoaJuridica = new javax.swing.JButton();
         btnReserva = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
+        btnCidade = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EasyRoom");
-        setPreferredSize(new java.awt.Dimension(1600, 1000));
 
         pnlUsuario.setBackground(new java.awt.Color(32, 41, 95));
         pnlUsuario.setPreferredSize(new java.awt.Dimension(198, 324));
@@ -93,6 +95,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Celso Júnior Degasperi");
 
+        lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/user.png"))); // NOI18N
+
         javax.swing.GroupLayout pnlUsuarioLayout = new javax.swing.GroupLayout(pnlUsuario);
         pnlUsuario.setLayout(pnlUsuarioLayout);
         pnlUsuarioLayout.setHorizontalGroup(
@@ -113,11 +117,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(44, 44, 44)))
                         .addGap(20, 20, 20))))
+            .addGroup(pnlUsuarioLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(lblUser)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlUsuarioLayout.setVerticalGroup(
             pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUsuarioLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(36, 36, 36)
+                .addComponent(lblUser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
@@ -125,7 +135,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnHome)
                 .addGap(18, 18, 18)
                 .addComponent(btnReport)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 403, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addGap(44, 44, 44))
         );
@@ -147,7 +157,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 1253, Short.MAX_VALUE)
                 .addContainerGap())
         );
         pnlLogoLayout.setVerticalGroup(
@@ -216,10 +226,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCidade.setBackground(new java.awt.Color(238, 107, 38));
+        btnCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/cidade.png"))); // NOI18N
+        btnCidade.setText("Cadastro de Cidades");
+        btnCidade.setToolTipText("");
+        btnCidade.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCidade.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCidade.setMaximumSize(new java.awt.Dimension(170, 75));
+        btnCidade.setMinimumSize(new java.awt.Dimension(170, 75));
+        btnCidade.setPreferredSize(new java.awt.Dimension(170, 75));
+        btnCidade.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCidadeActionPerformed(evt);
+            }
+        });
+
         dskPrincipal.setLayer(btnPessoaFisica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnPessoaJuridica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskPrincipal.setLayer(btnCidade, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dskPrincipalLayout = new javax.swing.GroupLayout(dskPrincipal);
         dskPrincipal.setLayout(dskPrincipalLayout);
@@ -227,14 +254,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dskPrincipalLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(dskPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         dskPrincipalLayout.setVerticalGroup(
@@ -242,12 +270,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(dskPrincipalLayout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,7 +286,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(pnlUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 813, Short.MAX_VALUE)
+                    .addComponent(pnlLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 1333, Short.MAX_VALUE)
                     .addComponent(dskPrincipal)))
         );
         layout.setVerticalGroup(
@@ -299,6 +327,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    private void btnCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCidadeActionPerformed
+        IfrCidade ifrCidade = new IfrCidade();
+        dskPrincipal.add(ifrCidade);
+        ifrCidade.setVisible(true);
+    }//GEN-LAST:event_btnCidadeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,6 +369,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCidade;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPessoaFisica;
@@ -347,6 +382,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnlLogo;
     private javax.swing.JPanel pnlUsuario;
     // End of variables declaration//GEN-END:variables
