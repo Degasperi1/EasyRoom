@@ -20,8 +20,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
-        getContentPane().setBackground(new Color(238, 107, 38));
-        //makeFullScreen();
+        getContentPane().setBackground(new Color(238, 107, 38));      
+        //makeFullScreen();     
         
     }
     
@@ -162,7 +162,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGap(697, 697, 697))
         );
 
-        dskPrincipal.setBackground(new java.awt.Color(220, 220, 220));
+        dskPrincipal.setBackground(new java.awt.Color(204, 204, 204));
 
         btnPessoaFisica.setBackground(new java.awt.Color(238, 107, 38));
         btnPessoaFisica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/cadastro.png"))); // NOI18N
