@@ -33,9 +33,9 @@ public class Entidade {
     @Column(name = "nr_endereco")
     private Integer numero;
     @Column(name = "ie_situacao")
-    private Character situaca0;
-    @Column(name = "ie_usuario_cadastro")
-    private Character usuarioCadastro;
+    private Character situacao;
+    @Column(name = "id_usuario_cadastro")
+    private Integer usuarioCadastro;
     @Column(name = "nr_telefone")
     private String telefone;
     @Column(name = "nr_celular")
@@ -78,19 +78,19 @@ public class Entidade {
         this.numero = numero;
     }
 
-    public Character getSituaca0() {
-        return situaca0;
+    public Character getSituacao() {
+        return situacao;
     }
 
-    public void setSituaca0(Character situaca0) {
-        this.situaca0 = situaca0;
+    public void setSituacao(Character situaca0) {
+        this.situacao = situaca0;
     }
 
-    public Character getUsuarioCadastro() {
+    public Integer getUsuarioCadastro() {
         return usuarioCadastro;
     }
 
-    public void setUsuarioCadastro(Character usuarioCadastro) {
+    public void setUsuarioCadastro(Integer usuarioCadastro) {
         this.usuarioCadastro = usuarioCadastro;
     }
 

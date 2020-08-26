@@ -5,7 +5,12 @@
  */
 package Entidade;
 
+import Utils.Calendario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;  
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,16 +35,16 @@ public class PessoaFisica {
     @Column(name = "nm_pessoa_fisica")
     private String nome;
     @Column(name = "nr_cpf")
-    private Integer cpf;
+    private String cpf;
     @Column(name = "nr_rg")
-    private Integer rg;
+    private String rg;
     @Column(name = "dt_nascimento")
     private Date dataNascimento;
     @Column(name = "ie_sexo")
     private Character sexo;
     @JoinColumn(name = "id_entidade", referencedColumnName = "id_entidade")
     @OneToOne
-    private Entidade idEntidade;
+    private Entidade idEntidade;    
 
     public Integer getId() {
         return id;
@@ -57,19 +62,19 @@ public class PessoaFisica {
         this.nome = nome;
     }
 
-    public Integer getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(Integer cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public Integer getRg() {
+    public String getRg() {
         return rg;
     }
 
-    public void setRg(Integer rg) {
+    public void setRg(String rg) {
         this.rg = rg;
     }
 
@@ -77,8 +82,14 @@ public class PessoaFisica {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNascimento(String dataNascimento) {
+        Date date;
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(dataNascimento);
+            this.dataNascimento = date;
+        } catch (ParseException ex) {
+            Logger.getLogger(PessoaFisica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Character getSexo() {
