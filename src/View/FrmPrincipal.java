@@ -325,7 +325,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnPessoaFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaFisicaActionPerformed
-        // TODO add your handling code here:
+        IfrPessoa ifrPessoa = new IfrPessoa();
+        dskPrincipal.add(ifrPessoa);
+        ifrPessoa.setVisible(true);
     }//GEN-LAST:event_btnPessoaFisicaActionPerformed
 
     private void btnPessoaJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPessoaJuridicaActionPerformed

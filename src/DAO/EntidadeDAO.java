@@ -37,7 +37,9 @@ public class EntidadeDAO extends Dao<Entidade> {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         List<Entidade> entidade = null;
         try {
-            org.hibernate.Query q = sessao.createQuery("from Entidade e, PessoaFisica p WHERE e.ie_situacao = 'A' AND p.nm_pessoa_fisica LIKE '%" + criteria + " ORDER BY e.id_entidade");
+            org.hibernate.Query q = sessao.createQuery("from Entidade e, PessoaFisica p WHERE e.ie_situacao = 'A' "
+                    + "AND e.ie_situacao = 'A' "
+                    + "AND p.nm_pessoa_fisica LIKE '%" + criteria + " ORDER BY e.id_entidade");
             entidade = q.list();
             return entidade;
         } catch (HibernateException hibEx) {
