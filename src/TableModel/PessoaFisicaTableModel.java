@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import Entidade.PessoaFisica;
+import Utils.Formatacao;
 
 /**
  *
@@ -18,7 +19,7 @@ import Entidade.PessoaFisica;
 public class PessoaFisicaTableModel extends AbstractTableModel {
 
     private List<PessoaFisica> dados = new ArrayList<>();
-    private String[] colunas = {"ID","Nome", "CPF", "RG", "Dt. Nascimento"};
+    private String[] colunas = {"ID","Nome", "CPF", "RG", "Dt. Nascimento", "Entidade"};
 
     public PessoaFisicaTableModel() {
         updateData("");
@@ -61,7 +62,9 @@ public class PessoaFisicaTableModel extends AbstractTableModel {
             case 3:
                 return dados.get(linha).getRg();
             case 4:
-                return dados.get(linha).getDataNascimento();
+                return Formatacao.ajustaDataDMA(dados.get(linha).getDataNascimento().toString());
+            case 5:
+                return dados.get(linha).getIdEntidade().getId();
         }
 
         return null;

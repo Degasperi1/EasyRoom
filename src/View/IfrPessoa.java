@@ -12,9 +12,8 @@ import Entidade.Entidade;
 import Entidade.Estado;
 import Entidade.PessoaFisica;
 import TableModel.PessoaFisicaTableModel;
+import Utils.Formatacao;
 import Utils.JTableUtilities;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -30,7 +29,6 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     PessoaFisicaTableModel tableModel = new PessoaFisicaTableModel();
     int idEntidade = 0;
     int idPessoaFisica = 0;
-    
 
     public IfrPessoa() {
         initComponents();
@@ -40,6 +38,7 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         JTableUtilities.setCellsAlignment(tblPessoa, SwingConstants.CENTER, new int[]{0, 2});
         tblPessoa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//seleção de única linha
         FrmPrincipal frmPrincipal = new FrmPrincipal();
+        Formatacao.formatarData(tfdDataNascimento);
     }
 
     /**
@@ -58,7 +57,6 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         lbNome = new javax.swing.JLabel();
         tfdNome = new javax.swing.JTextField();
         lbDtNascimento = new javax.swing.JLabel();
-        tfdDataNascimento = new javax.swing.JTextField();
         lbSexo = new javax.swing.JLabel();
         jcbSexo = new javax.swing.JComboBox<>();
         lbCpf = new javax.swing.JLabel();
@@ -80,6 +78,7 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         tfdEmail = new javax.swing.JTextField();
         lbCodigo = new javax.swing.JLabel();
         tfdMostraId = new javax.swing.JTextField();
+        tfdDataNascimento = new javax.swing.JFormattedTextField();
         pnlConsultar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
@@ -144,6 +143,12 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
 
         tfdMostraId.setEditable(false);
 
+        tfdDataNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfdDataNascimentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlCadastrarLayout = new javax.swing.GroupLayout(pnlCadastrar);
         pnlCadastrar.setLayout(pnlCadastrarLayout);
         pnlCadastrarLayout.setHorizontalGroup(
@@ -193,22 +198,6 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlCadastrarLayout.createSequentialGroup()
-                                .addComponent(lbCpf)
-                                .addGap(111, 111, 111)
-                                .addComponent(tfdCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbRg)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfdRg, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarLayout.createSequentialGroup()
-                                .addComponent(lbDtNascimento)
-                                .addGap(34, 34, 34)
-                                .addComponent(tfdDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbSexo)
-                                .addGap(18, 18, 18)
-                                .addComponent(jcbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarLayout.createSequentialGroup()
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNome)
@@ -216,7 +205,25 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfdMostraId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(tfdNome, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pnlCadastrarLayout.createSequentialGroup()
+                                .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbCpf)
+                                    .addComponent(lbDtNascimento))
+                                .addGap(34, 34, 34)
+                                .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlCadastrarLayout.createSequentialGroup()
+                                        .addComponent(tfdDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lbSexo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jcbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlCadastrarLayout.createSequentialGroup()
+                                        .addComponent(tfdCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lbRg)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tfdRg, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(0, 259, Short.MAX_VALUE))
             .addComponent(jSeparator1)
         );
@@ -234,9 +241,9 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDtNascimento)
-                    .addComponent(tfdDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbSexo)
-                    .addComponent(jcbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfdDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCpf)
@@ -399,40 +406,40 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        EntidadeDAO entidadeDao = new EntidadeDAO();
-        Entidade entidade = new Entidade();
-        
-        Estado estado = new Estado ();
-        estado.setId_estado(1);
-        estado.setDs_estado("Rio Grande do Sul");
-        estado.setIe_estado("RS");
-        estado.setIe_situacao('a');
-        
-        Cidade cidade = new Cidade();
-        cidade.setDs_cidade("Lajeado");
-        cidade.setId_cidade(1);
-        cidade.setId_estado(estado);
-        cidade.setId_usuario_cadastro(1);
-        cidade.setIe_situacao('a');
-        
-        
-        entidade.setId(idEntidade);
-        entidade.setEndereco(tfdEndereco.getText());
-        entidade.setBairro(tfdBairro.getText());
-        entidade.setCelular(tfdCelular.getText());
-        entidade.setTelefone(tfdTelefone.getText());
-        entidade.setEmail(tfdEmail.getText());
-        entidade.setNumero(Integer.parseInt(tfdNumero.getText()));
-        entidade.setUsuarioCadastro(1);
-        entidade.setCidade(cidade);
-        entidade.setSituacao('A');
-        
-        entidadeDao.save(entidade);
-        
-        
-        PessoaFisicaDAO pessoaFisicaDao = new PessoaFisicaDAO();
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        
+        if (validaCampos()) {
+
+            EntidadeDAO entidadeDao = new EntidadeDAO();
+            Entidade entidade = new Entidade();
+
+            Estado estado = new Estado();
+            estado.setId_estado(1);
+            estado.setDs_estado("Rio Grande do Sul");
+            estado.setIe_estado("RS");
+            estado.setIe_situacao('a');
+
+            Cidade cidade = new Cidade();
+            cidade.setDs_cidade("Lajeado");
+            cidade.setId_cidade(1);
+            cidade.setId_estado(estado);
+            cidade.setId_usuario_cadastro(1);
+            cidade.setIe_situacao('a');
+
+            entidade.setId(idEntidade);
+            entidade.setEndereco(tfdEndereco.getText());
+            entidade.setBairro(tfdBairro.getText());
+            entidade.setCelular(tfdCelular.getText());
+            entidade.setTelefone(tfdTelefone.getText());
+            entidade.setEmail(tfdEmail.getText());
+            entidade.setNumero(Integer.parseInt(tfdNumero.getText()));
+            entidade.setUsuarioCadastro(1);
+            entidade.setCidade(cidade);
+            entidade.setSituacao('A');
+
+            entidadeDao.save(entidade);
+
+            PessoaFisicaDAO pessoaFisicaDao = new PessoaFisicaDAO();
+            PessoaFisica pessoaFisica = new PessoaFisica();
+
 //        Date data = new Date();
 //        
 //        
@@ -440,23 +447,26 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
 //        
 //        data = calendar.obterDataAtualDMA();
 //        
-        pessoaFisica.setNome(tfdNome.getText());
-        pessoaFisica.setCpf(tfdCpf.getText());
-        pessoaFisica.setRg(tfdRg.getText());
-        pessoaFisica.setDataNascimento(tfdDataNascimento.getText());
-        pessoaFisica.setId(idPessoaFisica);
-        pessoaFisica.setIdEntidade(entidade);
-        
-        if(jcbSexo.getSelectedIndex() == 0){
-            pessoaFisica.setSexo('M');
-        }else if (jcbSexo.getSelectedIndex() == 1){
-            pessoaFisica.setSexo('F');
-        }else{
-            pessoaFisica.setSexo('O');
+            pessoaFisica.setNome(tfdNome.getText());
+            pessoaFisica.setCpf(tfdCpf.getText());
+            pessoaFisica.setRg(tfdRg.getText());
+            pessoaFisica.setDataNascimento(tfdDataNascimento.getText());
+            pessoaFisica.setId(idPessoaFisica);
+            pessoaFisica.setIdEntidade(entidade);
+
+            if (jcbSexo.getSelectedIndex() == 0) {
+                pessoaFisica.setSexo('M');
+            } else if (jcbSexo.getSelectedIndex() == 1) {
+                pessoaFisica.setSexo('F');
+            } else {
+                pessoaFisica.setSexo('O');
+            }
+
+            pessoaFisicaDao.save(pessoaFisica);
+
+            limpaCampos();
+            this.tableModel.updateData("");
         }
-        
-        pessoaFisicaDao.save(pessoaFisica);
-        
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -467,7 +477,7 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         if (tblPessoa.getSelectedRow() != -1) {
             //remonta o produto, possuindo o ID, basta buscar os dados no banco:
             EntidadeDAO entidadeDAO = new EntidadeDAO();
-            Entidade entidade = entidadeDAO.findById((int) tableModel.getValueAt(tblPessoa.getSelectedRow(), 0));
+            Entidade entidade = entidadeDAO.findById((int) tableModel.getValueAt(tblPessoa.getSelectedRow(), 5));
             entidade.setSituacao('I'); //INATIVANDO
             entidadeDAO.delete(entidade);
             this.tableModel.updateData("");
@@ -509,6 +519,10 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     private void tfdBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdBairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfdBairroActionPerformed
+
+    private void tfdDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfdDataNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfdDataNascimentoActionPerformed
     private void limpaCampos() {
         tfdNome.setText("");
         tfdDataNascimento.setText("");
@@ -522,17 +536,22 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
         tfdEmail.setText("");
     }
 
-//    private boolean validaCampos() {
-//        boolean valido = true;
-//        if (txaDescricao.getText().length() == 0 || tfdValor.getText().length() == 0) {
-//            valido = false;
-//            JOptionPane.showMessageDialog(null, "Os campos não podem estar vazios.", "Verifique os campos!", JOptionPane.WARNING_MESSAGE);
-//        } else if (!Validacao.validarValor(tfdValor.getText())) {
-//            JOptionPane.showMessageDialog(null, "O valor precisa ser maior que zero e válido", "Verifique os campos!", JOptionPane.WARNING_MESSAGE);
-//            valido = false;
-//        }
-//        return valido;
-//    }
+    private boolean validaCampos() {
+        boolean valido = true;
+        if (tfdNome.getText().length() == 0
+                || Formatacao.removerFormatacao(tfdDataNascimento.getText()).length() == 0
+                || tfdRg.getText().length() == 0
+                || tfdCpf.getText().length() == 0
+                || tfdBairro.getText().length() == 0
+                || tfdEndereco.getText().length() == 0
+                || tfdTelefone.getText().length() == 0
+                || tfdCelular.getText().length() == 0
+                || tfdEmail.getText().length() == 0) {
+            valido = false;
+            JOptionPane.showMessageDialog(null, "Os campos não podem estar vazios.", "Verifique os campos!", JOptionPane.WARNING_MESSAGE);
+        }
+        return valido;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -566,7 +585,7 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
     private javax.swing.JTextField tfdBuscar;
     private javax.swing.JTextField tfdCelular;
     private javax.swing.JTextField tfdCpf;
-    private javax.swing.JTextField tfdDataNascimento;
+    private javax.swing.JFormattedTextField tfdDataNascimento;
     private javax.swing.JTextField tfdEmail;
     private javax.swing.JTextField tfdEndereco;
     private javax.swing.JTextField tfdMostraId;
