@@ -91,6 +91,7 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
         spnComodos = new javax.swing.JSpinner();
         spnBanheiros = new javax.swing.JSpinner();
         tfdValor = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
         pnlConsultar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
@@ -136,6 +137,9 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
 
         spnBanheiros.setModel(new javax.swing.SpinnerNumberModel(1, 1, 30, 1));
 
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("Campos marcados com '*' são de preenchimento obrigatório.");
+
         javax.swing.GroupLayout pnlCadastrarLayout = new javax.swing.GroupLayout(pnlCadastrar);
         pnlCadastrar.setLayout(pnlCadastrarLayout);
         pnlCadastrarLayout.setHorizontalGroup(
@@ -144,7 +148,8 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -196,8 +201,13 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(tfdValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarLayout.createSequentialGroup()
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(24, 24, 24))))
         );
 
         pnlTipoQuarto.addTab("Cadastrar", pnlCadastrar);
@@ -464,6 +474,7 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pnlCadastrar;
