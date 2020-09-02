@@ -65,6 +65,7 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
         spnAndar = new javax.swing.JSpinner();
         tfdNumero = new javax.swing.JTextField();
         btnTipoQuarto = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
         pnlConsulta = new javax.swing.JPanel();
         btnExcluir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -107,6 +108,9 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText("Campos marcados com '*' são de preenchimento obrigatório.");
+
         javax.swing.GroupLayout pnlCadastrarLayout = new javax.swing.GroupLayout(pnlCadastrar);
         pnlCadastrar.setLayout(pnlCadastrarLayout);
         pnlCadastrarLayout.setHorizontalGroup(
@@ -115,7 +119,8 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarLayout.createSequentialGroup()
-                        .addGap(0, 821, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10))
                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
@@ -163,7 +168,9 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
                         .addComponent(cmbTipoQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnTipoQuarto)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 304, Short.MAX_VALUE)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(23, 23, 23))
         );
 
@@ -408,6 +415,7 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlCadastrar;
     private javax.swing.JPanel pnlConsulta;
