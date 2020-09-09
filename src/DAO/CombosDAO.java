@@ -12,7 +12,7 @@ import org.hibernate.Session;
  *
  * @author pretto
  */
-public class CombosDAO<T> {
+public class CombosDAO {
 
     ResultSet resultado = null;
 
@@ -38,7 +38,7 @@ public class CombosDAO<T> {
     public void definirItemCombo(JComboBox combo, Object item) {
         DefaultComboBoxModel model = (DefaultComboBoxModel) combo.getModel();
         for (int i = 1; i < model.getSize(); i++) {
-            T obj = (T) model.getElementAt(i);
+            Object obj = model.getElementAt(i);
             if (obj.toString().equals(item.toString())) {
                 model.setSelectedItem(item);
                 return;

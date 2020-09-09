@@ -1,6 +1,6 @@
 -- Configurações de auditoria
 CREATE TABLE audit_log (
-    username text, -- who did the change
+    userid integer, -- who did the change
     event_time_utc timestamp, -- when the event was recorded
     table_name text, -- contains schema-qualified table name
     operation text, -- INSERT, UPDATE, DELETE or TRUNCATE
@@ -28,7 +28,7 @@ BEGIN
         before_value, 
         after_value 
     ) VALUES ( 
-        session_user, 
+        NEW.id_usuario_cadastro, 
         current_timestamp AT TIME ZONE 'UTC', 
         TG_TABLE_SCHEMA ||  '.' || TG_TABLE_NAME, 
         TG_OP, 

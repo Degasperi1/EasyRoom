@@ -280,26 +280,34 @@ public class IfrCidade extends javax.swing.JInternalFrame {
             p.setId_cidade(idCidade);
             p.setDs_cidade(tfdNome.getText());
 
-            
             p.setId_usuario_cadastro(1); // ID = 1 (admin)
             p.setIe_situacao('A'); //A = Ativa
-            
-            
+
             Estado estado = new Estado();
             estado.setId_estado(1);
             estado.setDs_estado("Rio Grande do Sul");
             estado.setIe_estado("RS");
             estado.setIe_situacao('A');
-            
+
             p.setId_estado(estado);
-            
+
             if (idCidade == 0) {
-                dao.save(p);
-                limpaCampos();
+                Integer returnOfSavedID = dao.save(p);
+                if (returnOfSavedID != null) {
+                    JOptionPane.showMessageDialog(null, "Cidade cadastrada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar cidade...", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                dao.update(p);
-                this.idCidade = 0;
-                limpaCampos();
+                String retorno = dao.update(p);
+                if (retorno == null) {
+                    JOptionPane.showMessageDialog(null, "Cidade atualizada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    this.idCidade = 0;
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar cidade\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             }
             this.tableModel.updateData("");
         }
@@ -314,8 +322,13 @@ public class IfrCidade extends javax.swing.JInternalFrame {
             CidadeDAO dao = new CidadeDAO();
             Cidade p = dao.findById((int) tableModel.getValueAt(tblCidade.getSelectedRow(), 0));
             p.setIe_situacao('I'); //INATIVANDO
-            dao.delete(p);
-            this.tableModel.updateData("");
+            String retorno = dao.update(p);
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Cidade excluída com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                this.tableModel.updateData("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir cidade\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma Cidade para Excluir.", "Verifique a seleção!", JOptionPane.WARNING_MESSAGE);
         }

@@ -267,20 +267,27 @@ public class IfrProduto extends javax.swing.JInternalFrame {
             Produto p = new Produto();
             p.setId_produto(idproduto);
             p.setDs_produto(txaDescricao.getText());
-
             String semPontosAdicionais = tfdValor.getText().replace(".", "");
-            //p.setVl_venda(Double.parseDouble(tfdValor.getText().replace(',', '.')));
             p.setVl_venda(Double.parseDouble(semPontosAdicionais.replace(',', '.')));//removendo pontos extras antes de inserir
-
             p.setId_usuario_cadastro(1); // ID = 1 (admin)
             p.setIe_situacao('A'); //A = Ativa
             if (idproduto == 0) {
-                dao.save(p);
-                limpaCampos();
+                Integer returnOfSavedID = dao.save(p);//ID recem adicionado pronto para ser usado em outro local
+                if (returnOfSavedID != null) {
+                    JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar produto", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                dao.update(p);
-                this.idproduto = 0;
-                limpaCampos();
+                String retorno = dao.update(p);
+                if (retorno == null) {
+                    JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    this.idproduto = 0;
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar produto\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             }
             this.tableModel.updateData("");
         }
@@ -296,8 +303,13 @@ public class IfrProduto extends javax.swing.JInternalFrame {
             ProdutoDAO dao = new ProdutoDAO();
             Produto p = dao.findById((int) tableModel.getValueAt(tblProduto.getSelectedRow(), 0));
             p.setIe_situacao('I'); //INATIVANDO
-            dao.delete(p);
-            this.tableModel.updateData("");
+            String retorno = dao.update(p);
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Produto excluído com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                this.tableModel.updateData("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir produto\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um produto para Excluir.", "Verifique a seleção!", JOptionPane.WARNING_MESSAGE);
         }
