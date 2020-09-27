@@ -5,6 +5,7 @@
  */
 package View;
 
+import Utils.Sessao;
 import java.awt.Color;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -23,6 +24,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setBackground(new Color(238, 107, 38));      
         //makeFullScreen();
         setExtendedState(FrmPrincipal.MAXIMIZED_BOTH);
+        System.out.println(Sessao.getInstance().getUsuario().getId());
         
     }
     
