@@ -5,6 +5,7 @@
  */
 package main;
 
+import View.FrmLogin;
 import View.FrmPrincipal;
 import java.awt.Color;
 import javax.swing.UIManager;
@@ -42,7 +43,7 @@ public class Main {
             UIManager.put("control", new Color(...)) */
 
         //start aplication
-        FrmPrincipal tela = new FrmPrincipal();
+        FrmLogin tela = new FrmLogin();
         tela.setVisible(true);
 
     }
