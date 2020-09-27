@@ -479,7 +479,13 @@ public class IfrPessoa extends javax.swing.JInternalFrame {
             EntidadeDAO entidadeDAO = new EntidadeDAO();
             Entidade entidade = entidadeDAO.findById((int) tableModel.getValueAt(tblPessoa.getSelectedRow(), 5));
             entidade.setSituacao('I'); //INATIVANDO
-            entidadeDAO.delete(entidade);
+            String retorno = entidadeDAO.update(entidade);
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Pessoa excluída com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                this.tableModel.updateData("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir Pessoa\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
             this.tableModel.updateData("");
         } else {
             JOptionPane.showMessageDialog(null, "Selecione uma Pessoa para Excluir.", "Verifique a seleção!", JOptionPane.WARNING_MESSAGE);

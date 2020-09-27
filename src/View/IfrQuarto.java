@@ -24,7 +24,7 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
 
     QuartoTableModel tableModel = new QuartoTableModel();
     int idquarto = 0;
-    CombosDAO<TipoQuarto> cdao;
+    CombosDAO cdao;
 
     /**
      * Creates new form IfrQuarto
@@ -39,7 +39,8 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
         cdao = new CombosDAO();
         this.attCombo();
     }
-    public void attCombo(){
+
+    public void attCombo() {
         cmbTipoQuarto.removeAllItems();
         cdao.popularCombo("TipoQuarto", cmbTipoQuarto);
     }
@@ -325,12 +326,22 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
             q.setId_tipo_quarto((TipoQuarto) cmbTipoQuarto.getSelectedItem());
 
             if (idquarto == 0) {
-                dao.save(q);
-                limpaCampos();
+                Integer returnOfSavedID = dao.save(q);
+                if (returnOfSavedID != null) {
+                    JOptionPane.showMessageDialog(null, "Quarto cadastrado com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar quarto...", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                dao.update(q);
-                this.idquarto = 0;
-                limpaCampos();
+                String retorno = dao.update(q);
+                if (retorno == null) {
+                    JOptionPane.showMessageDialog(null, "Quarto atualizado com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    this.idquarto = 0;
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar quarto\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             }
 
             this.tableModel.updateData("");
@@ -342,8 +353,13 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
             QuartoDAO dao = new QuartoDAO();
             Quarto q = dao.findById((int) tableModel.getValueAt(tblQuarto.getSelectedRow(), 0));
             q.setIe_situacao('I'); //INATIVANDO
-            dao.delete(q);
-            this.tableModel.updateData("");
+            String retorno = dao.update(q);
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Quarto excluído com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                this.tableModel.updateData("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir quarto\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um quarto para Excluir.", "Verifique a seleção!", JOptionPane.WARNING_MESSAGE);
         }
@@ -357,7 +373,7 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
             tfdMostraId.setText(String.valueOf(idquarto));
             tfdNumero.setText(quartoBusca.getNr_quarto());
             spnAndar.setValue(Integer.parseInt(quartoBusca.getNr_andar()));
-                     
+
             cdao.definirItemCombo(cmbTipoQuarto, quartoBusca.getId_tipo_quarto());
             //retorna à aba de cadastro
             pnlQuarto.setSelectedIndex(0);

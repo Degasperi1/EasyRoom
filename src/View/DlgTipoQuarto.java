@@ -38,7 +38,8 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
         JTableUtilities.setCellsAlignment(tblTipoQuarto, SwingConstants.CENTER, new int[]{0, 2, 3, 4, 5});
         Formatacao.formatarMoeda(tfdValor);
     }
-        public DlgTipoQuarto(IfrQuarto parent, boolean modal) {     
+
+    public DlgTipoQuarto(IfrQuarto parent, boolean modal) {
         initComponents();
         limpaCampos();
         this.parent = parent;
@@ -48,9 +49,8 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
         tblTipoQuarto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JTableUtilities.setCellsAlignment(tblTipoQuarto, SwingConstants.CENTER, new int[]{0, 2, 3, 4, 5});
         Formatacao.formatarMoeda(tfdValor);
-        
+
     }
-    
 
     private boolean validaCampos() {
         boolean valido = true;
@@ -356,12 +356,22 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
             t.setId_usuario_cadastro(1); // ID = 1 (admin)
             t.setIe_situacao('A'); //A = Ativa
             if (idtipo_quarto == 0) {
-                dao.save(t);
-                limpaCampos();
+                Integer returnOfSavedID = dao.save(t);
+                if (returnOfSavedID != null) {
+                    JOptionPane.showMessageDialog(null, "Tipo de quarto cadastrado com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar tipo de quarto...", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                dao.update(t);
-                this.idtipo_quarto = 0;
-                limpaCampos();
+                String retorno = dao.update(t);
+                if (retorno == null) {
+                    JOptionPane.showMessageDialog(null, "Tipo de quarto atualizado com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    this.idtipo_quarto = 0;
+                    limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar tipo de quarto\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
             }
             this.tableModel.updateData("");
         }
@@ -378,8 +388,13 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
             TipoQuarto t = dao.findById((int) tableModel.getValueAt(tblTipoQuarto.getSelectedRow(), 0));
             t.setIe_situacao('I'); //INATIVANDO
 
-            dao.update(t);
-            this.tableModel.updateData("");
+            String retorno = dao.update(t);
+            if (retorno == null) {
+                JOptionPane.showMessageDialog(null, "Tipo de quarto excluído com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                this.tableModel.updateData("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao excluir tipo de quarto\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um produto para Excluir.", "Verifique a seleção!", JOptionPane.WARNING_MESSAGE);
         }
@@ -390,7 +405,7 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
             this.idtipo_quarto = (int) tableModel.getValueAt(tblTipoQuarto.getSelectedRow(), 0);
 
             TipoQuarto tqBusca = new TipoQuartoDAO().findById(this.idtipo_quarto);
-            
+
             tfdMostraId.setText(String.valueOf(idtipo_quarto));
             txaDescricao.setText(String.valueOf(tqBusca.getDs_tipo_quarto()));
             spnCapacidade.setValue(tqBusca.getNr_capacidade());
