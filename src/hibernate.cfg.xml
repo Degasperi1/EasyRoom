@@ -17,5 +17,6 @@
         <mapping class="Entidade.PessoaFisica"/>
         <mapping class="Entidade.TipoQuarto"/>
         <mapping class="Entidade.Quarto"/>
+        <mapping class="Entidade.AuditoriaDados"/>
     </session-factory>
 </hibernate-configuration>

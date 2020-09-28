@@ -56,10 +56,6 @@ public class ProdutoDAO extends Dao<Produto> {
         try {
             org.hibernate.Query q = sessao.createQuery("from Produto p WHERE ie_situacao = 'A' ORDER BY id_produto");
             produtos = q.list();
-//test<><><><><>
-//            for (Produto produto : produtos) {
-//                produto.setVl_venda(produto.getVl_venda() + 77);
-//            }
             return produtos;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
