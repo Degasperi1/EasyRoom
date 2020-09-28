@@ -5,8 +5,8 @@
  */
 package DAO;
 
+import Entidade.Usuario;
 import Utils.HibernateUtil;
-import Entidade.PessoaFisica;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -16,13 +16,13 @@ import org.hibernate.Transaction;
  *
  * @author Degasperi
  */
-public class PessoaFisicaDAO extends Dao<PessoaFisica> {
-    
-    public PessoaFisica findById(int id) {
+public class UsuarioDAO extends Dao<Usuario> {
+
+    public Usuario findById(int id) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction transacao = sessao.beginTransaction();
-            PessoaFisica retorno = (PessoaFisica) sessao.get(PessoaFisica.class, id);
+            Usuario retorno = (Usuario) sessao.get(Usuario.class, id);
             return retorno;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
@@ -32,13 +32,13 @@ public class PessoaFisicaDAO extends Dao<PessoaFisica> {
         return null;
     }
 
-    public List<PessoaFisica> findAllByDescription(String criteria) {
+    public List<Usuario> findAllByDescription(String criteria) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
-        List<PessoaFisica> pessoaFisica = null;
+        List<Usuario> usuarios = null;
         try {
-            org.hibernate.Query q = sessao.createQuery("from PessoaFisica p WHERE nm_pessoa_fisica LIKE '%" + criteria + " %' ORDER BY id_pessoa_fisica");
-            pessoaFisica = q.list();
-            return pessoaFisica;
+            org.hibernate.Query q = sessao.createQuery("from Usuario p WHERE login LIKE '%" + criteria + "%' AND situacao = 'A' ORDER BY login");
+            usuarios = q.list();
+            return usuarios;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
         } finally {
@@ -47,19 +47,18 @@ public class PessoaFisicaDAO extends Dao<PessoaFisica> {
         return null;
     }
 
-    public List<PessoaFisica> findAll() {
+    public List<Usuario> findAll() {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
-        List<PessoaFisica> pessoaFisica = null;
+        List<Usuario> usuarios = null;
         try {
-            org.hibernate.Query q = sessao.createQuery("from PessoaFisica ORDER BY id_pessoa_fisica");
-            pessoaFisica = q.list();
-            return pessoaFisica;
+            org.hibernate.Query q = sessao.createQuery("from Usuario p WHERE situacao = 'A' ORDER BY login");
+            usuarios = q.list();
+            return usuarios;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
         } finally {
             sessao.close();
         }
         return null;
-    }        
-   
+    }
 }
