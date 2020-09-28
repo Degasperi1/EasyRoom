@@ -329,6 +329,7 @@ public class IfrUsuario extends javax.swing.JInternalFrame {
             tfdMostraId.setText(String.valueOf(id));
             tfdLogin.setText(String.valueOf(tableModel.getValueAt(tblUsuario.getSelectedRow(), 1)));
             jpfSenha.setText("");
+            tfdPessoa.setText(String.valueOf(tableModel.getValueAt(tblUsuario.getSelectedRow(), 2)));
 
             //retorna à aba de cadastro
             pnlUsuario.setSelectedIndex(0);
