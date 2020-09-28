@@ -20,6 +20,7 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
+        getRootPane().setDefaultButton(btnEntrar);
     }
 
     /**
@@ -112,6 +113,7 @@ public class FrmLogin extends javax.swing.JFrame {
             Sessao.getInstance().setUsuario(new Usuario(user, password));
             //ABRE A TELA INICIAL AGORA
             new FrmPrincipal().setVisible(true);//VEJA QUE NÃO PASSEI O OBJETO DE SESSÃO
+            this.dispose();
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
