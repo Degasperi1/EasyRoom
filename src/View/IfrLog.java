@@ -177,7 +177,7 @@ public class IfrLog extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         if (rbErro.isSelected()) {
-            this.tableModel.updateData(tfdBusca.getText(), "ERRO");
+            this.tableModel.updateData(tfdBusca.getText(), "ERROR");
         } else if (rbWarn.isSelected()) {
             this.tableModel.updateData(tfdBusca.getText(), "WARN");
         }

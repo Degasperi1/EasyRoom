@@ -267,9 +267,11 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
 
     private void rbOperacaoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rbOperacaoStateChanged
         if (!rbOperacao.isSelected()) {
+            tfdCriterio.setEnabled(true);
             pnlOps.setVisible(false);
         } else {
             pnlOps.setVisible(true);
+            tfdCriterio.setEnabled(false);
         }
     }//GEN-LAST:event_rbOperacaoStateChanged
 
