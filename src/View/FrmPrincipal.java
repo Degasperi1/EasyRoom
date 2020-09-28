@@ -59,6 +59,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnReserva = new javax.swing.JButton();
         btnProduto = new javax.swing.JButton();
         btnCidade = new javax.swing.JButton();
+        btnUsuario2 = new javax.swing.JButton();
         btnQuarto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -245,6 +246,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnUsuario2.setBackground(new java.awt.Color(238, 107, 38));
+        btnUsuario2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/usuario.png"))); // NOI18N
+        btnUsuario2.setText("Cadastro de Usuários");
+        btnUsuario2.setToolTipText("");
+        btnUsuario2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnUsuario2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnUsuario2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnUsuario2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuario2ActionPerformed(evt);
+            }
+        });
+
         btnQuarto.setBackground(new java.awt.Color(238, 107, 38));
         btnQuarto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/bed-45.png"))); // NOI18N
         btnQuarto.setText("Cadastro de Quartos");
@@ -263,6 +277,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         dskPrincipal.setLayer(btnReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnProduto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnCidade, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskPrincipal.setLayer(btnUsuario2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnQuarto, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dskPrincipalLayout = new javax.swing.GroupLayout(dskPrincipal);
@@ -271,18 +286,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dskPrincipalLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dskPrincipalLayout.createSequentialGroup()
+                        .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dskPrincipalLayout.createSequentialGroup()
+                    .addGap(84, 84, 84)
                     .addComponent(btnQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                    .addContainerGap(1076, Short.MAX_VALUE)))
         );
         dskPrincipalLayout.setVerticalGroup(
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,9 +315,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addComponent(btnQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(dskPrincipalLayout.createSequentialGroup()
+                    .addGap(234, 234, 234)
+                    .addComponent(btnQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(333, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -356,10 +382,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ifrCidade.setVisible(true);
     }//GEN-LAST:event_btnCidadeActionPerformed
 
+    private void btnUsuario2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuario2ActionPerformed
+        IfrUsuario ifrUsuario = new IfrUsuario();
+        dskPrincipal.add(ifrUsuario);
+        ifrUsuario.setVisible(true);
+    }//GEN-LAST:event_btnUsuario2ActionPerformed
+
     private void btnQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuartoActionPerformed
-        IfrQuarto ifrQuarto = new IfrQuarto();
-        dskPrincipal.add(ifrQuarto);
-        ifrQuarto.setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnQuartoActionPerformed
 
     /**
@@ -407,6 +437,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnQuarto;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnReserva;
+    private javax.swing.JButton btnUsuario;
+    private javax.swing.JButton btnUsuario2;
     private javax.swing.JDesktopPane dskPrincipal;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

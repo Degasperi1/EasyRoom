@@ -5,34 +5,106 @@
  */
 package Entidade;
 
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
- * @author Eduardo
+ * @author Degasperi
  */
+@Entity
+@Table(name = "usuario")
 public class Usuario {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
+    private Integer id;
+    @Column(name = "ds_usuario")
     private String login;
+    @Column(name = "ds_senha")
+    private String senha;
+    @Column(name = "dt_criacao")
+    private Date criacao;
+    @Column(name = "dt_alteracao_senha")
+    private Date alteracao;
+    @Column(name = "ie_situacao")
+    private Character situacao;
+    @Column(name = "id_pessoa_fisica")
+    private Integer pessoa;
 
-    public Usuario(String id, String login) {
-        
-    } public Usuario() {
-}
+    public Usuario(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
 
-    public String getId() {
+    public Usuario() {
+    }
+    
+    
+
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public void setLogin(String login) {
         this.login = login;
     }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Date getCriacao() {
+        return criacao;
+    }
+
+    public void setCriacao(Date criacao) {
+        this.criacao = criacao;
+    }
+
+    public Date getAlteracao() {
+        return alteracao;
+    }
+
+    public void setAlteracao(Date alteracao) {
+        this.alteracao = alteracao;
+    }
+
+    public Integer getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Integer pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public Character getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(Character situacao) {
+        this.situacao = situacao;
+    }
+
     
+
+
 }
