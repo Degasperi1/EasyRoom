@@ -77,7 +77,12 @@ public class AuditoriaTableModel extends AbstractTableModel {
             case 1:
                 return dados.get(linha).getEvent_time_utc();
             case 2:
-                return dados.get(linha).getTable_name();
+                //com o schema do banco onde a tabela está
+                //return dados.get(linha).getTable_name();
+                
+                //sem o schema
+                String tbl = dados.get(linha).getTable_name();
+                return tbl.substring(tbl.indexOf(".")+1);
             case 3:
                 return dados.get(linha).getOperation();
 

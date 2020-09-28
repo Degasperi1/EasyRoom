@@ -19,6 +19,8 @@ import java.util.stream.Stream;
  */
 public class LogUtils {
 
+    private static final int MAX_LINE_SIZE = 80;
+
     private static List<String> readFileLines(String fileName) {
         List<String> list = new ArrayList<>();
 
@@ -35,22 +37,24 @@ public class LogUtils {
         List<String> linhas = LogUtils.readFileLines(filename);
         ArrayList<LogData> retorno = new ArrayList<>();
         for (String linha : linhas) {
-            //OBJETO PARA POPULAR
-            LogUtils.LogData log = new LogUtils.LogData();
-            String[] splitted = linha.trim().split(" ");
+            if (linha.length() > MAX_LINE_SIZE) { //verifica pra ver se o tamanho bate
+                //OBJETO PARA POPULAR
+                LogUtils.LogData log = new LogUtils.LogData();
+                String[] splitted = linha.trim().split(" ");
 
-            //PREPARANDO A MENSAGEM TÉCNICA
-            StringBuilder sb = new StringBuilder("");
-            for (int i = 3; i < splitted.length - 10; i++) {
-                sb.append(splitted[i]).append(" ");
-            }
-            //POSSO TESTAR AGORA PRA VER SE CABE DENTRO DO CRITÉRIO ENVIADO
-            if (sb.toString().contains(criteria)) {
+                //PREPARANDO A MENSAGEM TÉCNICA
+                StringBuilder sb = new StringBuilder("");
+                for (int i = 3; i < splitted.length - 10; i++) {
+                    sb.append(splitted[i]).append(" ");
+                }
+                //POSSO TESTAR AGORA PRA VER SE CABE DENTRO DO CRITÉRIO ENVIADO
+                if (sb.toString().contains(criteria)) {
 
-                log.setType(splitted[0]);
-                log.setTimestamp(splitted[1] + " " + splitted[2]);
-                log.setMessage(sb.toString());
-                retorno.add(log);
+                    log.setType(splitted[0]);
+                    log.setTimestamp(splitted[1] + " " + splitted[2]);
+                    log.setMessage(sb.toString());
+                    retorno.add(log);
+                }
             }
 
         }
@@ -62,24 +66,25 @@ public class LogUtils {
         List<String> linhas = LogUtils.readFileLines(filename);
         ArrayList<LogData> retorno = new ArrayList<>();
         for (String linha : linhas) {
-            //OBJETO PARA POPULAR
-            LogUtils.LogData log = new LogUtils.LogData();
-            String[] splitted = linha.trim().split(" ");
+            if (linha.length() > MAX_LINE_SIZE) { //verifica pra ver se o tamanho bate
+                //OBJETO PARA POPULAR
+                LogUtils.LogData log = new LogUtils.LogData();
+                String[] splitted = linha.trim().split(" ");
 
-            //PREPARANDO A MENSAGEM TÉCNICA
-            StringBuilder sb = new StringBuilder("");
-            for (int i = 3; i < splitted.length - 10; i++) {
-                sb.append(splitted[i]).append(" ");
+                //PREPARANDO A MENSAGEM TÉCNICA
+                StringBuilder sb = new StringBuilder("");
+                for (int i = 3; i < splitted.length - 10; i++) {
+                    sb.append(splitted[i]).append(" ");
+                }
+                //POSSO TESTAR AGORA PRA VER SE CABE DENTRO DO CRITÉRIO ENVIADO
+                if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)) {
+
+                    log.setType(splitted[0]);
+                    log.setTimestamp(splitted[1] + " " + splitted[2]);
+                    log.setMessage(sb.toString());
+                    retorno.add(log);
+                }
             }
-            //POSSO TESTAR AGORA PRA VER SE CABE DENTRO DO CRITÉRIO ENVIADO
-            if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)) {
-
-                log.setType(splitted[0]);
-                log.setTimestamp(splitted[1] + " " + splitted[2]);
-                log.setMessage(sb.toString());
-                retorno.add(log);
-            }
-
         }
         return retorno;
     }

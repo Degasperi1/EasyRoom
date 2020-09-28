@@ -82,7 +82,7 @@ public class AuditoriaDAO {
         List<AuditoriaDados> lista = null;
         try {
             org.hibernate.Query q = sessao.createQuery("from AuditoriaDados a WHERE operation = '" + criteria + "' ORDER BY operation");
-            lista = q.list();           //sempre o nome da entidade e o campo(atributo) que tem na entidade, não do banco
+            lista = q.list();           
             return lista;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
@@ -97,7 +97,7 @@ public class AuditoriaDAO {
         List<AuditoriaDados> lista = null;
         try {
             org.hibernate.Query q = sessao.createQuery("from AuditoriaDados a WHERE userid = " + criteria + " ORDER BY userid");
-            lista = q.list();           //sempre o nome da entidade e o campo(atributo) que tem na entidade, não do banco
+            lista = q.list();           
             return lista;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
