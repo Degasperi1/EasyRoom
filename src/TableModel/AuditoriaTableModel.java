@@ -18,7 +18,7 @@ import javax.swing.table.AbstractTableModel;
 public class AuditoriaTableModel extends AbstractTableModel {
 
     private List<AuditoriaDados> dados = new ArrayList<>();
-    private String[] colunas = {"ID User", "Timestamp", "Tabela", "Operação"};
+    private String[] colunas = {"Usuário", "Timestamp", "Tabela", "Operação"};
 
     public AuditoriaTableModel() {
         updateData("");

@@ -8,6 +8,7 @@ package Utils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -76,7 +77,6 @@ public class LogUtils {
                 for (int i = 3; i < splitted.length - 10; i++) {
                     sb.append(splitted[i]).append(" ");
                 }
-                //POSSO TESTAR AGORA PRA VER SE CABE DENTRO DO CRITÉRIO ENVIADO
                 if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)) {
 
                     log.setType(splitted[0]);
@@ -89,24 +89,71 @@ public class LogUtils {
         return retorno;
     }
 
-//EM PRODUÇÂO
-//    public static ArrayList<LogData> getLogsBetweenDates(String filename, String criteria, String date1, String date2) {
-//
-//        ArrayList<LogUtils.LogData> logs = LogUtils.getLogs(filename, "");//PEGA TODOS OS LOGS
-//        ArrayList<LogUtils.LogData> retorno = new ArrayList<>();
-//        //MONTA COM APENAS AS DATAS ENTRE date1 e date2
-//        for (LogData log : logs) {
-//            //Logica
-//            //Data do log tem que estar entre date1 e date2
-//            String[] splitted = log.getTimestamp().split(" ");
-//            Date compara = new Date(splitted[0]);
-//            if (compara.after(new Date(date1)) && compara.before(new Date(date2))) { //compara.compareTo(date1) >= 0 && compara.compareTo(date2) <= 0
-//                retorno.add(log);
-//            }
-//        }
-//
-//        return retorno;
-//    }
+    // EM PRODUÇÃO
+    public static ArrayList<LogData> getLogs(String filename, String criteria, String tipoErro, String dataInicial, String dataFinal) {
+
+        List<String> linhas = LogUtils.readFileLines(filename);
+        ArrayList<LogData> retorno = new ArrayList<>();
+
+        for (String linha : linhas) {
+            if (linha.length() > MIN_LINE_SIZE) {
+                LogUtils.LogData log = new LogUtils.LogData();
+                String[] splitted = linha.trim().split(" ");
+
+                // MENSAGEM TÉCNICA
+                StringBuilder sb = new StringBuilder("");
+                for (int i = 3; i < splitted.length - 10; i++) {
+                    sb.append(splitted[i]).append(" ");
+                }
+
+                // A Data do arquivo se encontra em -> splitted[1] <-
+                LocalDate logdate = LocalDate.parse(splitted[1]);
+                if (!dataInicial.equals("") && dataFinal.equals("")) { // Caso 1
+                    LocalDate dInicial = LocalDate.parse(dataInicial);
+                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)
+                            && logdate.isAfter(dInicial)) { // && VERIFICAR TAMBÉM A DATA
+                        log.setType(splitted[0]);
+                        log.setTimestamp(splitted[1] + " " + splitted[2]);
+                        log.setMessage(sb.toString());
+                        retorno.add(log);
+                    }
+                } else if (dataInicial.equals("") && !dataFinal.equals("")) { // Caso 2
+                    LocalDate dFinal = LocalDate.parse(dataFinal);
+                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)
+                            && logdate.isBefore(dFinal)) {// && VERIFICAR TAMBÉM A DATA
+                        log.setType(splitted[0]);
+                        log.setTimestamp(splitted[1] + " " + splitted[2]);
+                        log.setMessage(sb.toString());
+                        retorno.add(log);
+                    }
+                } else if (!dataInicial.equals("") && !dataFinal.equals("")) { // Caso 3
+                    LocalDate dInicial = LocalDate.parse(dataInicial);
+                    LocalDate dFinal = LocalDate.parse(dataFinal);
+                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)
+                            && DateUtils.isBetween(dInicial, dFinal, logdate)) {// && VERIFICAR TAMBÉM A DATA
+                        log.setType(splitted[0]);
+                        log.setTimestamp(splitted[1] + " " + splitted[2]);
+                        log.setMessage(sb.toString());
+                        retorno.add(log);
+                    }
+                } else if (dataInicial.equals("") && dataFinal.equals("")) { // Caso 4
+                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)) {
+                        log.setType(splitted[0]);
+                        log.setTimestamp(splitted[1] + " " + splitted[2]);
+                        log.setMessage(sb.toString());
+                        retorno.add(log);
+                    }
+                }
+            }
+        }
+        return retorno;
+    }
+
+    // PARA REFATORAR O CÓDIGO E DIMINUIR A REPETIÇÃO
+    private static LogData montaInfoLog() {
+        return null;
+    }
+
     public static class LogData {
 
         private String type;

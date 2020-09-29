@@ -17,20 +17,31 @@ import java.util.Date;
  */
 public class DateUtils {
 
-  public static Date asDate(LocalDate localDate) {
-    return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-  }
+    public static Date asDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
 
-  public static Date asDate(LocalDateTime localDateTime) {
-    return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-  }
+    public static Date asDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
 
-  public static LocalDate asLocalDate(Date date) {
-    return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-  }
+    public static LocalDate asLocalDate(Date date) {
+        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+    }
 
-  public static LocalDateTime asLocalDateTime(Date date) {
-    return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
-  }
+    public static LocalDateTime asLocalDateTime(Date date) {
+        return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public static boolean isBetween(LocalDate a, LocalDate b, LocalDate compara) {
+        return compara.isAfter(a) && compara.isBefore(b);
+    }
+
+    public static boolean isAfter(LocalDate date, LocalDate compara) {
+        return compara.isAfter(date);
+    }
+
+    public static boolean isBefore(LocalDate date, LocalDate compara) {
+        return compara.isBefore(date);
+    }
 }
-
