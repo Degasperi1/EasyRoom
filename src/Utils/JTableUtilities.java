@@ -5,10 +5,9 @@
  */
 package Utils;
 
-import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
@@ -39,6 +38,16 @@ public class JTableUtilities {
 
         for (int i = 0; i < cols.length; i++) {
             table.getColumnModel().getColumn(cols[i]).setCellRenderer(rightRenderer);
+        }
+    }
+        public static void setWidthAsPercentages(JTable table,
+            double... percentages) {
+        final double factor = 10000;
+
+        TableColumnModel model = table.getColumnModel();
+        for (int columnIndex = 0; columnIndex < percentages.length; columnIndex++) {
+            TableColumn column = model.getColumn(columnIndex);
+            column.setPreferredWidth((int) (percentages[columnIndex] * factor));
         }
     }
 

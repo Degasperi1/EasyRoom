@@ -61,6 +61,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnCidade = new javax.swing.JButton();
         btnUsuario2 = new javax.swing.JButton();
         btnQuarto = new javax.swing.JButton();
+        pnlAdmin = new javax.swing.JPanel();
+        btnLog = new javax.swing.JButton();
+        btnQuarto1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EasyRoom");
@@ -147,7 +150,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlLogo.setBackground(new java.awt.Color(32, 41, 95));
         pnlLogo.setPreferredSize(new java.awt.Dimension(163, 72));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/logo.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/logo_easyroom_50x34.png"))); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,11 +171,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
             pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLogoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(pnlLogoLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(pnlLogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(697, 697, 697))
         );
 
@@ -272,6 +273,56 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        pnlAdmin.setBackground(new java.awt.Color(238, 107, 38));
+        pnlAdmin.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opções de Administrador", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+
+        btnLog.setBackground(new java.awt.Color(238, 107, 38));
+        btnLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/log-45.png"))); // NOI18N
+        btnLog.setText("Logs do Sistema");
+        btnLog.setToolTipText("");
+        btnLog.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnLog.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLog.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogActionPerformed(evt);
+            }
+        });
+
+        btnQuarto1.setBackground(new java.awt.Color(238, 107, 38));
+        btnQuarto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/auditoria-45.png"))); // NOI18N
+        btnQuarto1.setText("Auditoria do Sistema");
+        btnQuarto1.setToolTipText("");
+        btnQuarto1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnQuarto1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuarto1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnQuarto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuarto1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAdminLayout = new javax.swing.GroupLayout(pnlAdmin);
+        pnlAdmin.setLayout(pnlAdminLayout);
+        pnlAdminLayout.setHorizontalGroup(
+            pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnQuarto1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(644, Short.MAX_VALUE))
+        );
+        pnlAdminLayout.setVerticalGroup(
+            pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAdminLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnQuarto1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
         dskPrincipal.setLayer(btnPessoaFisica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnPessoaJuridica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -279,6 +330,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         dskPrincipal.setLayer(btnCidade, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnUsuario2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnQuarto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskPrincipal.setLayer(pnlAdmin, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dskPrincipalLayout = new javax.swing.GroupLayout(dskPrincipal);
         dskPrincipal.setLayout(dskPrincipalLayout);
@@ -286,18 +338,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
             dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dskPrincipalLayout.createSequentialGroup()
                 .addGap(74, 74, 74)
-                .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
                 .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(dskPrincipalLayout.createSequentialGroup()
-                        .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
-                        .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(dskPrincipalLayout.createSequentialGroup()
+                                .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(dskPrincipalLayout.createSequentialGroup()
@@ -317,6 +372,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(pnlAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(dskPrincipalLayout.createSequentialGroup()
@@ -392,6 +449,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnQuartoActionPerformed
 
+    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        IfrLog ifrLog = new IfrLog();
+        dskPrincipal.add(ifrLog);
+        ifrLog.setVisible(true);
+    }//GEN-LAST:event_btnLogActionPerformed
+
+    private void btnQuarto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuarto1ActionPerformed
+        IfrAuditoria ifrAuditoria = new IfrAuditoria();
+        dskPrincipal.add(ifrAuditoria);
+        ifrAuditoria.setVisible(true);
+    }//GEN-LAST:event_btnQuarto1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -430,14 +499,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCidade;
     private javax.swing.JButton btnHome;
+    private javax.swing.JButton btnLog;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnPessoaFisica;
     private javax.swing.JButton btnPessoaJuridica;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnQuarto;
+    private javax.swing.JButton btnQuarto1;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnReserva;
-    private javax.swing.JButton btnUsuario;
     private javax.swing.JButton btnUsuario2;
     private javax.swing.JDesktopPane dskPrincipal;
     private javax.swing.JLabel jLabel2;
@@ -445,6 +515,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JPanel pnlAdmin;
     private javax.swing.JPanel pnlLogo;
     private javax.swing.JPanel pnlUsuario;
     // End of variables declaration//GEN-END:variables
