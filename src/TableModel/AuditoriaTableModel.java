@@ -29,17 +29,10 @@ public class AuditoriaTableModel extends AbstractTableModel {
             this.dados = new AuditoriaDAO().findAll();
             this.fireTableDataChanged();
         }
-//        } else {
-//            this.dados = new AuditoriaDAO().findAllByDescription(busca);
-//            this.fireTableDataChanged();
-//        }
     }
-
-    //CRIAR MAIS CRITERIOS DE BUSCA (VARIOS updateData)
-    //BUSCA PERSONALIZADA
+    // BUSCA PERSONALIZADA
     public void updateData(String userid, String operation,
-            String table) {
-        //MONTA AQUI A BUSCA QUE SERÁ ENVIADA AO HIBERNATE (AuditoriaDAO)
+            String table, String dataInicial, String dataFinal) {
         StringBuilder sql = new StringBuilder("from AuditoriaDados WHERE 1=1");
         if (!userid.equals("")) {
             sql.append("AND userid = " + userid);
@@ -48,6 +41,14 @@ public class AuditoriaTableModel extends AbstractTableModel {
         } else if (!table.equals("")) {
             //sql.append("AND table_name = '" + table + "'");
             sql.append("AND table_name LIKE '%" + table + "%'");
+        }
+        // - Verificar Datas
+        if (!dataInicial.equals("") && dataFinal.equals("")) { // event_time_utc > data
+            sql.append("AND event_time_utc > '"+dataInicial+"' ");
+        }else if (dataInicial.equals("") && !dataFinal.equals("")) { //  event_time_utc < data 
+            sql.append("AND event_time_utc < '"+dataFinal+"' ");
+        }else if (!dataInicial.equals("") && !dataFinal.equals("")) { // BETWEEN
+            sql.append("AND event_time_utc BETWEEN '"+dataInicial+"' AND '"+dataFinal+"' ");
         }
 
         this.dados = new AuditoriaDAO().findBySQL(sql.toString());

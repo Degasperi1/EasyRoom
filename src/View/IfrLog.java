@@ -58,7 +58,7 @@ public class IfrLog extends javax.swing.JInternalFrame {
         rbErro = new javax.swing.JRadioButton();
         rbWarn = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        btnRelLog = new javax.swing.JButton();
+        btnCSVLog = new javax.swing.JButton();
 
         tblLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,8 +100,8 @@ public class IfrLog extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Mensagem:");
 
-        btnRelLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/reports.png"))); // NOI18N
-        btnRelLog.setText("Gerar Relatórios de LOG");
+        btnCSVLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/exportar-csv-30.png"))); // NOI18N
+        btnCSVLog.setText("Exportar para CSV");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,26 +134,26 @@ public class IfrLog extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRelLog, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                            .addComponent(btnCSVLog, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
                         .addGap(4, 4, 4)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(rbErro)
-                            .addComponent(rbWarn)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(btnRelLog, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
+                            .addComponent(rbWarn))
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnCSVLog)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfdBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
@@ -162,7 +162,7 @@ public class IfrLog extends javax.swing.JInternalFrame {
                 .addComponent(scrLogTable, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFechar)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,8 +185,8 @@ public class IfrLog extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoLog;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCSVLog;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnRelLog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
