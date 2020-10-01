@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  */
 public class LogUtils {
 
-    private static final int MIN_LINE_SIZE = 80;
+    private static final int MIN_LINE_SIZE = 140;
 
     private static List<String> readFileLines(String fileName) {
         List<String> list = new ArrayList<>();

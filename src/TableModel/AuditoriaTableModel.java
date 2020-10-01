@@ -74,7 +74,7 @@ public class AuditoriaTableModel extends AbstractTableModel {
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getUserid();
+                return dados.get(linha).getUsuario().getLogin();
             case 1:
                 return dados.get(linha).getEvent_time_utc();
             case 2:
