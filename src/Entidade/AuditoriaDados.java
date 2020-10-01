@@ -5,7 +5,6 @@
  */
 package Entidade;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +35,10 @@ public class AuditoriaDados {
     private String table_name;
     @Column(name = "operation")
     private String operation;
+    @Column(name = "before_value")
+    private String before_value;
+    @Column(name = "after_value")
+    private String after_value;
 
     public Usuario getUsuario() {
         return usuario;
@@ -83,5 +86,20 @@ public class AuditoriaDados {
         return "user= " + usuario.getLogin() + ", event_time_utc= " + event_time_utc + ", table_name= " + table_name + ", operation= " + operation;
     }
 
-    
+    public String getBefore_value() {
+        return before_value;
+    }
+
+    public void setBefore_value(String before_value) {
+        this.before_value = before_value;
+    }
+
+    public String getAfter_value() {
+        return after_value;
+    }
+
+    public void setAfter_value(String after_value) {
+        this.after_value = after_value;
+    }
+
 }

@@ -18,7 +18,7 @@ import javax.swing.table.AbstractTableModel;
 public class AuditoriaTableModel extends AbstractTableModel {
 
     private List<AuditoriaDados> dados = new ArrayList<>();
-    private String[] colunas = {"Usuário", "Timestamp", "Tabela", "Operação"};
+    private String[] colunas = {"LOG ID","Usuário", "Timestamp", "Tabela", "Operação"};
 
     public AuditoriaTableModel() {
         updateData("");
@@ -30,6 +30,7 @@ public class AuditoriaTableModel extends AbstractTableModel {
             this.fireTableDataChanged();
         }
     }
+
     // BUSCA PERSONALIZADA
     public void updateData(String userid, String operation,
             String table, String dataInicial, String dataFinal) {
@@ -44,15 +45,15 @@ public class AuditoriaTableModel extends AbstractTableModel {
         }
         // - Verificar Datas
         if (!dataInicial.equals("") && dataFinal.equals("")) { // event_time_utc > data
-            sql.append("AND event_time_utc > '"+dataInicial+"' ");
-        }else if (dataInicial.equals("") && !dataFinal.equals("")) { //  event_time_utc < data 
-            sql.append("AND event_time_utc < '"+dataFinal+"' ");
-        }else if (!dataInicial.equals("") && !dataFinal.equals("")) { // BETWEEN
-            sql.append("AND event_time_utc BETWEEN '"+dataInicial+"' AND '"+dataFinal+"' ");
+            sql.append("AND event_time_utc > '" + dataInicial + "' ");
+        } else if (dataInicial.equals("") && !dataFinal.equals("")) { //  event_time_utc < data 
+            sql.append("AND event_time_utc < '" + dataFinal + "' ");
+        } else if (!dataInicial.equals("") && !dataFinal.equals("")) { // BETWEEN
+            sql.append("AND event_time_utc BETWEEN '" + dataInicial + "' AND '" + dataFinal + "' ");
         }
 
         this.dados = new AuditoriaDAO().findBySQL(sql.toString());
-        this.fireTableDataChanged();       
+        this.fireTableDataChanged();
     }
 
     @Override
@@ -74,19 +75,20 @@ public class AuditoriaTableModel extends AbstractTableModel {
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getUsuario().getLogin();
+                return dados.get(linha).getLogid();
             case 1:
-                return dados.get(linha).getEvent_time_utc();
+                return dados.get(linha).getUsuario().getLogin();
             case 2:
+                return dados.get(linha).getEvent_time_utc();
+            case 3:
                 //com o schema do banco onde a tabela está
                 //return dados.get(linha).getTable_name();
-                
+
                 //sem o schema
                 String tbl = dados.get(linha).getTable_name();
-                return tbl.substring(tbl.indexOf(".")+1);
-            case 3:
+                return tbl.substring(tbl.indexOf(".") + 1);
+            case 4:
                 return dados.get(linha).getOperation();
-
         }
 
         return null;
