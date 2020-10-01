@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,8 +27,9 @@ public class AuditoriaDados {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "logid")
     private Integer logid;
-    @Column(name = "userid")
-    private Integer userid;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @ManyToOne(optional = false)
+    private Usuario usuario;
     @Column(name = "event_time_utc")
     private String event_time_utc;
     @Column(name = "table_name")
@@ -34,12 +37,12 @@ public class AuditoriaDados {
     @Column(name = "operation")
     private String operation;
 
-    public Integer getUserid() {
-        return userid;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public String getEvent_time_utc() {
@@ -77,7 +80,7 @@ public class AuditoriaDados {
 
     @Override
     public String toString() {
-        return "userid= " + userid + ", event_time_utc= " + event_time_utc + ", table_name= " + table_name + ", operation= " + operation;
+        return "user= " + usuario.getLogin() + ", event_time_utc= " + event_time_utc + ", table_name= " + table_name + ", operation= " + operation;
     }
 
     

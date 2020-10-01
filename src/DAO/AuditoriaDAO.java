@@ -8,7 +8,9 @@ package DAO;
 import Entidade.AuditoriaDados;
 import Utils.HibernateUtil;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -23,7 +25,7 @@ public class AuditoriaDAO {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         List<AuditoriaDados> lista = null;
         try {
-            org.hibernate.Query q = sessao.createQuery("from AuditoriaDados ORDER BY userid");
+            org.hibernate.Query q = sessao.createQuery("from AuditoriaDados ORDER BY logid");
             lista = q.list();
             return lista;
         } catch (HibernateException hibEx) {
@@ -33,7 +35,8 @@ public class AuditoriaDAO {
         }
         return null;
     }
-        public List<AuditoriaDados> findBySQL(String sql) {
+
+    public List<AuditoriaDados> findBySQL(String sql) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         List<AuditoriaDados> lista = null;
         try {
@@ -82,7 +85,7 @@ public class AuditoriaDAO {
         List<AuditoriaDados> lista = null;
         try {
             org.hibernate.Query q = sessao.createQuery("from AuditoriaDados a WHERE operation = '" + criteria + "' ORDER BY operation");
-            lista = q.list();           
+            lista = q.list();
             return lista;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
@@ -97,7 +100,7 @@ public class AuditoriaDAO {
         List<AuditoriaDados> lista = null;
         try {
             org.hibernate.Query q = sessao.createQuery("from AuditoriaDados a WHERE userid = " + criteria + " ORDER BY userid");
-            lista = q.list();           
+            lista = q.list();
             return lista;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();

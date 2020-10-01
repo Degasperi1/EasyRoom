@@ -17,16 +17,23 @@ public class LogTableModel extends AbstractTableModel {
     public LogTableModel() {
         updateData("");
     }
+
     //PEGA TUDO
     public void updateData(String criteria) {
         this.dados = LogUtils.getLogs("src/logs.log", criteria);
         //ATUALIZA TABELA (TableModel)
         this.fireTableDataChanged();
     }
+
     //PEGA DE ACORDO COM O ERRO
-        public void updateData(String criteria, String tipoErro) {
+    public void updateData(String criteria, String tipoErro) {
         this.dados = LogUtils.getLogs("src/logs.log", criteria, tipoErro);
         //ATUALIZA TABELA (TableModel)
+        this.fireTableDataChanged();
+    }
+
+    public void updateData(String criteria, String tipoErro, String dataInicial, String dataFinal) {
+        this.dados = LogUtils.getLogs("src/logs.log", criteria, tipoErro, dataInicial, dataFinal);
         this.fireTableDataChanged();
     }
 
