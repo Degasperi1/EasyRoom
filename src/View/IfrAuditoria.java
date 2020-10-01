@@ -5,10 +5,13 @@
  */
 package View;
 
+import DAO.AuditoriaDAO;
+import Entidade.AuditoriaDados;
 import TableModel.AuditoriaTableModel;
 import Utils.JTableUtilities;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
@@ -53,6 +56,8 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
         pnlMostraInfos = new javax.swing.JPanel();
         scrTableAudit = new javax.swing.JScrollPane();
         tblAudit = new javax.swing.JTable();
+        btnVerDados = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         btnFechar = new javax.swing.JButton();
         pnlBusca = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -87,6 +92,16 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
         ));
         scrTableAudit.setViewportView(tblAudit);
 
+        btnVerDados.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnVerDados.setText("Ver dados completos");
+        btnVerDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerDadosActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Selecione um registro de auditoria para verificar as alterações e clique no botão ao lado:");
+
         javax.swing.GroupLayout pnlMostraInfosLayout = new javax.swing.GroupLayout(pnlMostraInfos);
         pnlMostraInfos.setLayout(pnlMostraInfosLayout);
         pnlMostraInfosLayout.setHorizontalGroup(
@@ -94,15 +109,26 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
             .addGroup(pnlMostraInfosLayout.createSequentialGroup()
                 .addComponent(scrTableAudit, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlMostraInfosLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(btnVerDados, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         pnlMostraInfosLayout.setVerticalGroup(
             pnlMostraInfosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMostraInfosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(scrTableAudit, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(scrTableAudit, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlMostraInfosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVerDados, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(13, 13, 13))
         );
 
+        btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/close-window-30.png"))); // NOI18N
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,18 +293,17 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
                             .addComponent(rbUsuario)
                             .addComponent(rbTabela)
                             .addComponent(rbOperacao))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                         .addComponent(pnlOps, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
                         .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCriterio)
                             .addComponent(tfdCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlBuscaLayout.createSequentialGroup()
-                        .addComponent(pnlOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlBuscaLayout.createSequentialGroup()
-                        .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnlOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addContainerGap())
         );
 
@@ -288,12 +313,14 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnFechar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(pnlBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnlMostraInfos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnlBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlMostraInfos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,9 +328,9 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
                 .addComponent(pnlBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlMostraInfos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+                .addGap(39, 39, 39)
+                .addComponent(btnFechar)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -326,7 +353,7 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // GERENCIAR AS BUSCAS
         // CHECAR O QUE ESTÁ MARCADO
-        
+
         // VARIÁVEIS E OBJETO DE FORMATAÇÃO
         String operacao = "";
         String usuario = "";
@@ -334,7 +361,7 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
         String dataInicial = "";
         String dataFinal = "";
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         // PEGA AS DATAS  
         // TESTA SE DIGITOU ALGO NO CAMPO DE DATA
         if (dcDataInicial.getDate() != null) {
@@ -360,6 +387,18 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
         this.tableModel.updateData(usuario, operacao, tabela, dataInicial, dataFinal);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnVerDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDadosActionPerformed
+        if (tblAudit.getSelectedRow() != -1) {
+            AuditoriaDAO dao = new AuditoriaDAO();//como transformar id em INT
+            DlgMostraDados mostraDados = new DlgMostraDados(this, true, dao.findByUserId((int) tblAudit.getValueAt(tblAudit.getSelectedRow(), 0)));
+            mostraDados.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um dado na tabela", "Atenção!", JOptionPane.WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_btnVerDadosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgOpcoes;
@@ -367,11 +406,13 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnRelAudit;
+    private javax.swing.JButton btnVerDados;
     private com.toedter.calendar.JDateChooser dcDataFinal;
     private com.toedter.calendar.JDateChooser dcDataInicial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblCriterio;
     private javax.swing.JPanel pnlBusca;
     private javax.swing.JPanel pnlData;
