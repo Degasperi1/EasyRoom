@@ -20,3 +20,62 @@ ERROR 2020-10-05 03:13:37 - Erro no registro: org.hibernate.exception.Constraint
  WARN 2020-10-05 03:13:38 - SQL Error: 0, SQLState: 25P02
 ERROR 2020-10-05 03:13:38 - ERROR: current transaction is aborted, commands ignored until end of transaction block WARN 2020-10-05 03:30:11 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
  WARN 2020-10-05 03:30:11 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-05 15:37:35 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-05 15:37:35 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-05 15:37:55 - SQL Error: 0, SQLState: 23503
+ERROR 2020-10-05 15:37:55 - ERROR: insert or update on table "audit_log" violates foreign key constraint "fk_audit_log"
+  Detalhe: Key (id_usuario)=(1) is not present in table "usuario".
+  Onde: SQL statement "INSERT INTO  audit_log(
+        logid, 
+        id_usuario, 
+        event_time_utc, 
+        table_name, 
+        operation, 
+        before_value, 
+        after_value 
+    ) VALUES (
+        default,
+        NEW.id_usuario_cadastro, 
+        current_timestamp AT TIME ZONE 'UTC', 
+        TG_TABLE_SCHEMA ||  '.' || TG_TABLE_NAME, 
+        TG_OP, 
+        old_row, 
+        new_row 
+    )"
+PL/pgSQL function audit_trigger() line 12 at SQL statement
+ERROR 2020-10-05 15:37:55 - Erro no registro: org.hibernate.exception.ConstraintViolationException: could not execute statement
+ WARN 2020-10-05 15:37:57 - SQL Error: 0, SQLState: 25P02
+ERROR 2020-10-05 15:37:57 - ERROR: current transaction is aborted, commands ignored until end of transaction block
+ WARN 2020-10-05 15:48:45 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-05 15:48:45 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-05 15:48:55 - SQL Error: 0, SQLState: 23503
+ERROR 2020-10-05 15:48:55 - ERROR: insert or update on table "audit_log" violates foreign key constraint "fk_audit_log"
+  Detalhe: Key (id_usuario)=(1) is not present in table "usuario".
+  Onde: SQL statement "INSERT INTO  audit_log(
+        logid, 
+        id_usuario, 
+        event_time_utc, 
+        table_name, 
+        operation, 
+        before_value, 
+        after_value 
+    ) VALUES (
+        default,
+        NEW.id_usuario_cadastro, 
+        current_timestamp AT TIME ZONE 'UTC', 
+        TG_TABLE_SCHEMA ||  '.' || TG_TABLE_NAME, 
+        TG_OP, 
+        old_row, 
+        new_row 
+    )"
+PL/pgSQL function audit_trigger() line 12 at SQL statement
+ERROR 2020-10-05 15:48:55 - Erro no registro: org.hibernate.exception.ConstraintViolationException: could not execute statement
+ WARN 2020-10-05 15:48:57 - SQL Error: 0, SQLState: 25P02
+ERROR 2020-10-05 15:48:57 - ERROR: current transaction is aborted, commands ignored until end of transaction block
+ WARN 2020-10-05 15:51:00 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-05 15:51:01 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-05 15:56:25 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-05 15:56:25 - HHH000402: Using Hibernate built-in connection pool (not for production use!) WARN 2020-10-05 20:14:35 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-05 20:14:35 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-05 20:15:32 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-05 20:15:32 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
