@@ -25,13 +25,6 @@ public class LogTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
-    //PEGA DE ACORDO COM O ERRO
-    public void updateData(String criteria, String tipoErro) {
-        this.dados = LogUtils.getLogs("src/logs.log", criteria, tipoErro);
-        //ATUALIZA TABELA (TableModel)
-        this.fireTableDataChanged();
-    }
-
     public void updateData(String criteria, String tipoErro, String dataInicial, String dataFinal) {
         this.dados = LogUtils.getLogs("src/logs.log", criteria, tipoErro, dataInicial, dataFinal);
         this.fireTableDataChanged();
@@ -68,5 +61,28 @@ public class LogTableModel extends AbstractTableModel {
                 return dados.get(linha).getMessage();
         }
         return null;
+    }
+
+    public void removeRow(int linha) {
+        this.dados.remove(linha);
+        this.fireTableRowsDeleted(linha, linha);// parâmetros ~> (início, fim)
+    }
+    
+    private void showData() {
+        dados.stream().map((dado) -> {
+            System.out.println("<><><><><><><><><><><><><><><><><><>");
+            return dado;
+        }).map((dado) -> {
+            System.out.println("Tipo:"+dado.getType()+"|");
+            return dado;
+        }).map((dado) -> {
+            System.out.println("Timestamp:"+dado.getTimestamp()+"|");
+            return dado;
+        }).map((dado) -> {
+            System.out.println("Mensagem:"+dado.getMessage()+"|");
+            return dado;
+        }).forEachOrdered((_item) -> {
+            System.out.println("<><><><><><><><><><><><><><><><><><>");
+        });
     }
 }
