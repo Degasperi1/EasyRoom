@@ -446,7 +446,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUsuario2ActionPerformed
 
     private void btnQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuartoActionPerformed
-        // TODO add your handling code here:
+        IfrQuarto ifrQuarto = new IfrQuarto();
+        dskPrincipal.add(ifrQuarto);
+        ifrQuarto.setVisible(true);
     }//GEN-LAST:event_btnQuartoActionPerformed
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed

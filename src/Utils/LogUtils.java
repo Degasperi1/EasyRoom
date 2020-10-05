@@ -22,7 +22,6 @@ import java.util.stream.Stream;
  */
 public class LogUtils {
 
-    private static final int MIN_LINE_SIZE = 140;
     // Patterns para as RegExp
     private static Pattern pTimestamp = Pattern.compile(RegExpArsenal.TIMESTAMP);
     private static Pattern pErrorstype = Pattern.compile(RegExpArsenal.ERROR_WARN);
@@ -43,10 +42,11 @@ public class LogUtils {
 
         List<String> linhas = LogUtils.readFileLines(filename);
         ArrayList<LogData> retorno = new ArrayList<>();
-        String mensagem = "";
-        String errorType = "";
-        String timestamp = "";
+
         for (String linha : linhas) {
+            String mensagem = "";
+            String errorType = "";
+            String timestamp = "";
             Matcher mMessage = pMessage.matcher(linha);
             if (mMessage.find()) {
                 mensagem = mMessage.group(0);
@@ -76,11 +76,12 @@ public class LogUtils {
 
         List<String> linhas = LogUtils.readFileLines(filename);
         ArrayList<LogData> retorno = new ArrayList<>();
-        String mensagem = "";
-        String timestamp = "";
-        String errorType = "";
 
         for (String linha : linhas) {
+            //sempre zerando as partes da linha para não replicar
+            String mensagem = "";
+            String timestamp = "";
+            String errorType = "";
             LogUtils.LogData log = new LogUtils.LogData();
             //EXTRAIO TODAS INFORMAÇÕES DA LINHA COM REGEXP
             Matcher mMessage = pMessage.matcher(linha);
@@ -97,45 +98,46 @@ public class LogUtils {
             if (mErrorsType.find()) {
                 errorType = mErrorsType.group(0);
             }
-            //preciso ver para transformar corretamente em um logdate
-            LocalDate logdate = LocalDate.parse(timestamp.substring(0, timestamp.indexOf(" ")));
-            if (!dataInicial.equals("") && dataFinal.equals("")) { // Caso 1
-                LocalDate dInicial = LocalDate.parse(dataInicial);
-                if (mensagem.contains(criteria) && errorType.equals(tipoErro)
-                        && logdate.isAfter(dInicial)) { // && VERIFICAR TAMBÉM A DATA
-                    log.setType(errorType);
-                    log.setTimestamp(timestamp);
-                    log.setMessage(mensagem);
-                    retorno.add(log);
-                }
-            } else if (dataInicial.equals("") && !dataFinal.equals("")) { // Caso 2
-                LocalDate dFinal = LocalDate.parse(dataFinal);
-                if (mensagem.contains(criteria) && errorType.equals(tipoErro)
-                        && logdate.isBefore(dFinal)) {// && VERIFICAR TAMBÉM A DATA
-                    log.setType(errorType);
-                    log.setTimestamp(timestamp);
-                    log.setMessage(mensagem);
-                    retorno.add(log);
-                }
-            } else if (!dataInicial.equals("") && !dataFinal.equals("")) { // Caso 3
-                LocalDate dInicial = LocalDate.parse(dataInicial);
-                LocalDate dFinal = LocalDate.parse(dataFinal);
-                if (mensagem.contains(criteria) && errorType.equals(tipoErro)
-                        && DateUtils.isBetween(dInicial, dFinal, logdate)) {// && VERIFICAR TAMBÉM A DATA
-                    log.setType(errorType);
-                    log.setTimestamp(timestamp);
-                    log.setMessage(mensagem);
-                    retorno.add(log);
-                }
-            } else if (dataInicial.equals("") && dataFinal.equals("")) { // Caso 4
-                if (mensagem.contains(criteria) && errorType.equals(tipoErro)) {
-                    log.setType(errorType);
-                    log.setTimestamp(timestamp);
-                    log.setMessage(mensagem);
-                    retorno.add(log);
+
+            if (!mensagem.equals("") && !timestamp.equals("") && !errorType.equals("")) {//verifica se a linha está ok, se possui tipo de erro, timestamp, mensagem...
+                LocalDate logdate = LocalDate.parse(timestamp.substring(0, timestamp.indexOf(" ")));
+                if (!dataInicial.equals("") && dataFinal.equals("")) { // Caso 1
+                    LocalDate dInicial = LocalDate.parse(dataInicial);
+                    if (mensagem.contains(criteria) && errorType.equals(tipoErro)
+                            && logdate.isAfter(dInicial)) { // && VERIFICAR TAMBÉM A DATA
+                        log.setType(errorType);
+                        log.setTimestamp(timestamp);
+                        log.setMessage(mensagem);
+                        retorno.add(log);
+                    }
+                } else if (dataInicial.equals("") && !dataFinal.equals("")) { // Caso 2
+                    LocalDate dFinal = LocalDate.parse(dataFinal);
+                    if (mensagem.contains(criteria) && errorType.equals(tipoErro)
+                            && logdate.isBefore(dFinal)) {// && VERIFICAR TAMBÉM A DATA
+                        log.setType(errorType);
+                        log.setTimestamp(timestamp);
+                        log.setMessage(mensagem);
+                        retorno.add(log);
+                    }
+                } else if (!dataInicial.equals("") && !dataFinal.equals("")) { // Caso 3
+                    LocalDate dInicial = LocalDate.parse(dataInicial);
+                    LocalDate dFinal = LocalDate.parse(dataFinal);
+                    if (mensagem.contains(criteria) && errorType.equals(tipoErro)
+                            && DateUtils.isBetween(dInicial, dFinal, logdate)) {// && VERIFICAR TAMBÉM A DATA
+                        log.setType(errorType);
+                        log.setTimestamp(timestamp);
+                        log.setMessage(mensagem);
+                        retorno.add(log);
+                    }
+                } else if (dataInicial.equals("") && dataFinal.equals("")) { // Caso 4
+                    if (mensagem.contains(criteria) && errorType.equals(tipoErro)) {
+                        log.setType(errorType);
+                        log.setTimestamp(timestamp);
+                        log.setMessage(mensagem);
+                        retorno.add(log);
+                    }
                 }
             }
-
         }
         return retorno;
     }
