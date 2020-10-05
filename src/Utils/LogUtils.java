@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,6 +23,10 @@ import java.util.stream.Stream;
 public class LogUtils {
 
     private static final int MIN_LINE_SIZE = 140;
+    // Patterns para as RegExp
+    private static Pattern pTimestamp = Pattern.compile(RegExpArsenal.TIMESTAMP);
+    private static Pattern pErrorstype = Pattern.compile(RegExpArsenal.ERROR_WARN);
+    private static Pattern pMessage = Pattern.compile(RegExpArsenal.VALUE_AFTER_ALTERNATE);
 
     private static List<String> readFileLines(String fileName) {
         List<String> list = new ArrayList<>();
@@ -37,114 +43,99 @@ public class LogUtils {
 
         List<String> linhas = LogUtils.readFileLines(filename);
         ArrayList<LogData> retorno = new ArrayList<>();
+        String mensagem = "";
+        String errorType = "";
+        String timestamp = "";
         for (String linha : linhas) {
-            if (linha.length() > MIN_LINE_SIZE) { //verifica pra ver se o tamanho bate
-                //OBJETO PARA POPULAR
-                LogUtils.LogData log = new LogUtils.LogData();
-                String[] splitted = linha.trim().split(" ");
-
-                //PREPARANDO A MENSAGEM TÉCNICA
-                StringBuilder sb = new StringBuilder("");
-                for (int i = 3; i < splitted.length - 10; i++) {
-                    sb.append(splitted[i]).append(" ");
-                }
-                //POSSO TESTAR AGORA PRA VER SE CABE DENTRO DO CRITÉRIO ENVIADO
-                if (sb.toString().contains(criteria)) {
-
-                    log.setType(splitted[0]);
-                    log.setTimestamp(splitted[1] + " " + splitted[2]);
-                    log.setMessage(sb.toString());
-                    retorno.add(log);
-                }
+            Matcher mMessage = pMessage.matcher(linha);
+            if (mMessage.find()) {
+                mensagem = mMessage.group(0);
             }
-
-        }
-        return retorno;
-    }
-
-    public static ArrayList<LogData> getLogs(String filename, String criteria, String tipoErro) {
-
-        List<String> linhas = LogUtils.readFileLines(filename);
-        ArrayList<LogData> retorno = new ArrayList<>();
-        for (String linha : linhas) {
-            if (linha.length() > MIN_LINE_SIZE) { //verifica pra ver se o tamanho bate
-                //OBJETO PARA POPULAR
+            Matcher mErrorsType = pErrorstype.matcher(linha);
+            if (mErrorsType.find()) {
+                errorType = mErrorsType.group(0);
+            }
+            Matcher mTimestamp = pTimestamp.matcher(linha);
+            if (mTimestamp.find()) {
+                timestamp = mTimestamp.group(0);
+            }
+            if (mensagem.contains(criteria) && !errorType.equals("")
+                    && !timestamp.equals("")) {
                 LogUtils.LogData log = new LogUtils.LogData();
-                String[] splitted = linha.trim().split(" ");
+                log.setMessage(mensagem);
+                log.setTimestamp(timestamp);
+                log.setType(errorType);
 
-                //PREPARANDO A MENSAGEM TÉCNICA
-                StringBuilder sb = new StringBuilder("");
-                for (int i = 3; i < splitted.length - 10; i++) {
-                    sb.append(splitted[i]).append(" ");
-                }
-                if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)) {
-
-                    log.setType(splitted[0]);
-                    log.setTimestamp(splitted[1] + " " + splitted[2]);
-                    log.setMessage(sb.toString());
-                    retorno.add(log);
-                }
+                retorno.add(log);
             }
         }
         return retorno;
     }
 
-    // EM PRODUÇÃO
     public static ArrayList<LogData> getLogs(String filename, String criteria, String tipoErro, String dataInicial, String dataFinal) {
 
         List<String> linhas = LogUtils.readFileLines(filename);
         ArrayList<LogData> retorno = new ArrayList<>();
+        String mensagem = "";
+        String timestamp = "";
+        String errorType = "";
 
         for (String linha : linhas) {
-            if (linha.length() > MIN_LINE_SIZE) {
-                LogUtils.LogData log = new LogUtils.LogData();
-                String[] splitted = linha.trim().split(" ");
+            LogUtils.LogData log = new LogUtils.LogData();
+            //EXTRAIO TODAS INFORMAÇÕES DA LINHA COM REGEXP
+            Matcher mMessage = pMessage.matcher(linha);
+            if (mMessage.find()) {
+                mensagem = mMessage.group(0);
+            }
 
-                // MENSAGEM TÉCNICA
-                StringBuilder sb = new StringBuilder("");
-                for (int i = 3; i < splitted.length - 10; i++) {
-                    sb.append(splitted[i]).append(" ");
+            Matcher mTimestamp = pTimestamp.matcher(linha);
+            if (mTimestamp.find()) {
+                timestamp = mTimestamp.group(0);
+            }
+
+            Matcher mErrorsType = pErrorstype.matcher(linha);
+            if (mErrorsType.find()) {
+                errorType = mErrorsType.group(0);
+            }
+            //preciso ver para transformar corretamente em um logdate
+            LocalDate logdate = LocalDate.parse(timestamp.substring(0, timestamp.indexOf(" ")));
+            if (!dataInicial.equals("") && dataFinal.equals("")) { // Caso 1
+                LocalDate dInicial = LocalDate.parse(dataInicial);
+                if (mensagem.contains(criteria) && errorType.equals(tipoErro)
+                        && logdate.isAfter(dInicial)) { // && VERIFICAR TAMBÉM A DATA
+                    log.setType(errorType);
+                    log.setTimestamp(timestamp);
+                    log.setMessage(mensagem);
+                    retorno.add(log);
                 }
-
-                // A Data do arquivo se encontra em -> splitted[1] <-
-                LocalDate logdate = LocalDate.parse(splitted[1]);
-                if (!dataInicial.equals("") && dataFinal.equals("")) { // Caso 1
-                    LocalDate dInicial = LocalDate.parse(dataInicial);
-                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)
-                            && logdate.isAfter(dInicial)) { // && VERIFICAR TAMBÉM A DATA
-                        log.setType(splitted[0]);
-                        log.setTimestamp(splitted[1] + " " + splitted[2]);
-                        log.setMessage(sb.toString());
-                        retorno.add(log);
-                    }
-                } else if (dataInicial.equals("") && !dataFinal.equals("")) { // Caso 2
-                    LocalDate dFinal = LocalDate.parse(dataFinal);
-                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)
-                            && logdate.isBefore(dFinal)) {// && VERIFICAR TAMBÉM A DATA
-                        log.setType(splitted[0]);
-                        log.setTimestamp(splitted[1] + " " + splitted[2]);
-                        log.setMessage(sb.toString());
-                        retorno.add(log);
-                    }
-                } else if (!dataInicial.equals("") && !dataFinal.equals("")) { // Caso 3
-                    LocalDate dInicial = LocalDate.parse(dataInicial);
-                    LocalDate dFinal = LocalDate.parse(dataFinal);
-                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)
-                            && DateUtils.isBetween(dInicial, dFinal, logdate)) {// && VERIFICAR TAMBÉM A DATA
-                        log.setType(splitted[0]);
-                        log.setTimestamp(splitted[1] + " " + splitted[2]);
-                        log.setMessage(sb.toString());
-                        retorno.add(log);
-                    }
-                } else if (dataInicial.equals("") && dataFinal.equals("")) { // Caso 4
-                    if (sb.toString().contains(criteria) && splitted[0].equals(tipoErro)) {
-                        log.setType(splitted[0]);
-                        log.setTimestamp(splitted[1] + " " + splitted[2]);
-                        log.setMessage(sb.toString());
-                        retorno.add(log);
-                    }
+            } else if (dataInicial.equals("") && !dataFinal.equals("")) { // Caso 2
+                LocalDate dFinal = LocalDate.parse(dataFinal);
+                if (mensagem.contains(criteria) && errorType.equals(tipoErro)
+                        && logdate.isBefore(dFinal)) {// && VERIFICAR TAMBÉM A DATA
+                    log.setType(errorType);
+                    log.setTimestamp(timestamp);
+                    log.setMessage(mensagem);
+                    retorno.add(log);
+                }
+            } else if (!dataInicial.equals("") && !dataFinal.equals("")) { // Caso 3
+                LocalDate dInicial = LocalDate.parse(dataInicial);
+                LocalDate dFinal = LocalDate.parse(dataFinal);
+                if (mensagem.contains(criteria) && errorType.equals(tipoErro)
+                        && DateUtils.isBetween(dInicial, dFinal, logdate)) {// && VERIFICAR TAMBÉM A DATA
+                    log.setType(errorType);
+                    log.setTimestamp(timestamp);
+                    log.setMessage(mensagem);
+                    retorno.add(log);
+                }
+            } else if (dataInicial.equals("") && dataFinal.equals("")) { // Caso 4
+                if (mensagem.contains(criteria) && errorType.equals(tipoErro)) {
+                    log.setType(errorType);
+                    log.setTimestamp(timestamp);
+                    log.setMessage(mensagem);
+                    retorno.add(log);
                 }
             }
+
         }
         return retorno;
     }
