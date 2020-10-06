@@ -6,9 +6,11 @@
 package View;
 
 import TableModel.LogTableModel;
+import Utils.CSVUtils;
 import Utils.JTableUtilities;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -109,6 +111,11 @@ public class IfrLog extends javax.swing.JInternalFrame {
 
         btnCSVLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/exportar-csv-30.png"))); // NOI18N
         btnCSVLog.setText("Exportar para CSV");
+        btnCSVLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCSVLogActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Data Inicial");
 
@@ -209,7 +216,7 @@ public class IfrLog extends javax.swing.JInternalFrame {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String dataInicial = "";
         String dataFinal = "";
-        
+
         // TESTA SE DIGITOU ALGO NO CAMPO DE DATA
         if (dcDataInicial.getDate() != null) {
             dataInicial = df.format(dcDataInicial.getDate());
@@ -224,6 +231,36 @@ public class IfrLog extends javax.swing.JInternalFrame {
             this.tableModel.updateData(tfdBusca.getText(), "WARN", dataInicial, dataFinal);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnCSVLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCSVLogActionPerformed
+        //GERANDO ARQUIVO DE LOG
+        //PEGAR O PATH PARA SALVAR O ARQUIVO
+        String getPathFileChooser = CSVUtils.getDirPath();
+        //PEDIR UM NOME PARA O ARQUIVO
+        String whatTheUserEntered = JOptionPane.showInputDialog(null,
+                "Digite um nome para o arquivo CSV", "Nome do arquivo",
+                JOptionPane.INFORMATION_MESSAGE);
+        if (whatTheUserEntered == null) {
+            System.out.println("The user canceled");
+        } else {
+            String[] cabecalho = {"Tipo de erro", "Timestamp", "Mensagem"};
+            String arquivopath = getPathFileChooser+"\\" + whatTheUserEntered + ".csv";
+            CSVUtils.writeOneLine(cabecalho, arquivopath);
+            //COMEÇA PEGAR AS INFORMAÇÕES DA TABELA
+            for (int i = 0; i < tblLog.getRowCount(); i++) {
+                String[] linha = new String[3];//3 COLUNAS
+                linha[0] = String.valueOf(tblLog.getValueAt(i, 0));
+                linha[1] = String.valueOf(tblLog.getValueAt(i, 1));
+                linha[2] = String.valueOf(tblLog.getValueAt(i, 2));
+                CSVUtils.writeOneLine(linha, arquivopath);
+
+            }
+            //AVISO
+            JOptionPane.showMessageDialog(null, "Arquivo de log gerado em: " + arquivopath,
+                    "LOG gerado com sucesso", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnCSVLogActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
