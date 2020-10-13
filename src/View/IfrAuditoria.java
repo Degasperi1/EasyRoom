@@ -7,13 +7,17 @@ package View;
 
 import DAO.AuditoriaDAO;
 import Entidade.AuditoriaDados;
+import Relatorios.AuditoriaRelatorio;
 import TableModel.AuditoriaTableModel;
 import Utils.JTableUtilities;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -146,6 +150,11 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
 
         btnRelAudit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/reports.png"))); // NOI18N
         btnRelAudit.setText("Gerar Relatório");
+        btnRelAudit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelAuditActionPerformed(evt);
+            }
+        });
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/search-30.png"))); // NOI18N
         btnBuscar.setText("Buscar");
@@ -299,11 +308,8 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
                         .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCriterio)
                             .addComponent(tfdCriterio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlBuscaLayout.createSequentialGroup()
-                        .addGroup(pnlBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnlOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addComponent(pnlOpcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -398,6 +404,22 @@ public class IfrAuditoria extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_btnVerDadosActionPerformed
+
+    private void btnRelAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelAuditActionPerformed
+        // GERANDO RELATÓRIO DE ACORDO COM A BUSCA
+
+        List<AuditoriaDados> lista = new ArrayList<>();
+        AuditoriaRelatorio relatorio = new AuditoriaRelatorio();
+        
+        //preencher lista
+        lista = tableModel.getDados();
+
+        try {
+            relatorio.gerarRelatorio(lista);
+        } catch (JRException ex) {
+            System.err.println("Erro ao gerar relatório!\n\n" + ex.toString());
+        }
+    }//GEN-LAST:event_btnRelAuditActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

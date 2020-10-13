@@ -93,4 +93,9 @@ public class AuditoriaTableModel extends AbstractTableModel {
 
         return null;
     }
+
+    public List<AuditoriaDados> getDados() {
+        return dados;
+    }
+    
 }
