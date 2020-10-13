@@ -41,7 +41,7 @@
 				</staticText>
 				<image>
 					<reportElement x="448" y="0" width="105" height="95" uuid="ab6873d3-3f32-4286-b3e6-a2d862ce6fcd"/>
-					<imageExpression><![CDATA["C:\\Users\\evand\\Desktop\\logoeasyroom_reports.jpg"]]></imageExpression>
+					<imageExpression><![CDATA["src/logoeasyroom_reports.jpg"]]></imageExpression>
 				</image>
 			</frame>
 			<frame>
