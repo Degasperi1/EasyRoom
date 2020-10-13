@@ -24,12 +24,14 @@ public class Dao<T> {
     public Integer save(T object) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         Integer cod = null;
+        Transaction transacao = null;
         try {
-            Transaction transacao = sessao.beginTransaction();
+            transacao = sessao.beginTransaction();
             cod = (Integer) sessao.save(object);
             transacao.commit();
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
+            transacao.rollback();
             Dao.logger.error("Erro no registro: " + hibEx.toString());
             //Dao.logger.warn("Erro no registro: " + hibEx.toString());
         } finally {
@@ -42,13 +44,15 @@ public class Dao<T> {
     public String update(T object) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         String retorno = null;
+        Transaction transacao = null;
         try {
-            Transaction transacao = sessao.beginTransaction();
+            transacao = sessao.beginTransaction();
             sessao.update(object);
             transacao.commit();
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
             retorno = hibEx.toString();
+            transacao.rollback();
             Dao.logger.error("Erro na atualização: " + hibEx.toString());
         } finally {
             sessao.close();
