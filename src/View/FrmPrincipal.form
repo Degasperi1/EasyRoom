@@ -479,7 +479,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnLog" min="-2" pref="173" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="btnQuarto1" min="-2" pref="173" max="-2" attributes="0"/>
+                      <Component id="btnAuditoria" min="-2" pref="173" max="-2" attributes="0"/>
                       <EmptySpace pref="644" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -489,7 +489,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnQuarto1" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
+                          <Component id="btnAuditoria" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
                           <Component id="btnLog" alignment="1" min="-2" pref="116" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="41" max="32767" attributes="0"/>
@@ -518,7 +518,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnQuarto1">
+            <Component class="javax.swing.JButton" name="btnAuditoria">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="26" green="6b" red="ee" type="rgb"/>
@@ -535,7 +535,7 @@
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuarto1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAuditoriaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
