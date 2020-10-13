@@ -104,6 +104,13 @@ public class Usuario {
         this.situacao = situacao;
     }
 
+    @Override
+    public String toString() {
+        return this.login;
+    }
+
+    
+    
     
 
 
