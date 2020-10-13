@@ -63,7 +63,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnQuarto = new javax.swing.JButton();
         pnlAdmin = new javax.swing.JPanel();
         btnLog = new javax.swing.JButton();
-        btnQuarto1 = new javax.swing.JButton();
+        btnAuditoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EasyRoom");
@@ -289,16 +289,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnQuarto1.setBackground(new java.awt.Color(238, 107, 38));
-        btnQuarto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/auditoria-45.png"))); // NOI18N
-        btnQuarto1.setText("Auditoria do Sistema");
-        btnQuarto1.setToolTipText("");
-        btnQuarto1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnQuarto1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnQuarto1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnQuarto1.addActionListener(new java.awt.event.ActionListener() {
+        btnAuditoria.setBackground(new java.awt.Color(238, 107, 38));
+        btnAuditoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/auditoria-45.png"))); // NOI18N
+        btnAuditoria.setText("Auditoria do Sistema");
+        btnAuditoria.setToolTipText("");
+        btnAuditoria.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAuditoria.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAuditoria.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAuditoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnQuarto1ActionPerformed(evt);
+                btnAuditoriaActionPerformed(evt);
             }
         });
 
@@ -310,7 +310,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
-                .addComponent(btnQuarto1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAuditoria, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(644, Short.MAX_VALUE))
         );
         pnlAdminLayout.setVerticalGroup(
@@ -318,7 +318,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(pnlAdminLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(pnlAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnQuarto1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAuditoria, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
@@ -457,11 +457,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ifrLog.setVisible(true);
     }//GEN-LAST:event_btnLogActionPerformed
 
-    private void btnQuarto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuarto1ActionPerformed
+    private void btnAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAuditoriaActionPerformed
         IfrAuditoria ifrAuditoria = new IfrAuditoria();
         dskPrincipal.add(ifrAuditoria);
         ifrAuditoria.setVisible(true);
-    }//GEN-LAST:event_btnQuarto1ActionPerformed
+    }//GEN-LAST:event_btnAuditoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -499,6 +499,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAuditoria;
     private javax.swing.JButton btnCidade;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLog;
@@ -507,7 +508,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPessoaJuridica;
     private javax.swing.JButton btnProduto;
     private javax.swing.JButton btnQuarto;
-    private javax.swing.JButton btnQuarto1;
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnReserva;
     private javax.swing.JButton btnUsuario2;
