@@ -111,6 +111,17 @@ public class FrmLogin extends javax.swing.JFrame {
             //LOGOU
             //SETA O USUÁRIO NA SESSÃO
             Sessao.getInstance().setUsuario(new Usuario(user, password));
+            Sessao.getInstance().setPermissao(0);
+            //ABRE A TELA INICIAL AGORA
+            new FrmPrincipal().setVisible(true);//VEJA QUE NÃO PASSEI O OBJETO DE SESSÃO
+            this.dispose();
+        }
+        
+        else{
+            //LOGOU
+            //SETA O USUÁRIO NA SESSÃO
+            Sessao.getInstance().setUsuario(new Usuario(user, password));
+            Sessao.getInstance().setPermissao(1);
             //ABRE A TELA INICIAL AGORA
             new FrmPrincipal().setVisible(true);//VEJA QUE NÃO PASSEI O OBJETO DE SESSÃO
             this.dispose();
