@@ -15,6 +15,8 @@ public class Sessao {
 
     private static Sessao instance = null;//PERTENCE A ESSA CLASSE
     private Usuario usuario;
+    private Integer permissao;
+
     
     //OUTROS ATRIBUTOS
 
@@ -27,6 +29,14 @@ public class Sessao {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public Integer getPermissao() {
+        return permissao;
+    }
+
+    public void setPermissao(Integer permissao) {
+        this.permissao = permissao;
     }
 
     public static synchronized Sessao getInstance() { //synchronized para não deixar duas threads criar dua

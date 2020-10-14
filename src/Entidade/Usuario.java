@@ -37,11 +37,14 @@ public class Usuario {
     private Character situacao;
     @Column(name = "id_pessoa_fisica")
     private Integer pessoa;
+    @Column(name = "ie_permissao")
+    private Integer permissao;
 
     public Usuario(String login, String senha) {
         this.login = login;
         this.senha = senha;
     }
+
 
     public Usuario() {
     }
@@ -109,9 +112,12 @@ public class Usuario {
         return this.login;
     }
 
-    
-    
-    
+    public Integer getPermissao() {
+        return permissao;
+    }
 
+    public void setPermissao(Integer permissao) {
+        this.permissao = permissao;
+    }
 
 }

@@ -26,6 +26,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setExtendedState(FrmPrincipal.MAXIMIZED_BOTH);
         System.out.println(Sessao.getInstance().getUsuario().getId());
         
+        pnlAdmin.setVisible(Sessao.getInstance().getPermissao() == 0);
+        
     }
     
     private void makeFullScreen() {

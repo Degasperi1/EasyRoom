@@ -1,0 +1,1 @@
+alter table usuario add column ie_permissao varchar

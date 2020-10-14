@@ -103,3 +103,12 @@ ERROR 2020-10-05 15:48:57 - ERROR: current transaction is aborted, commands igno
  WARN 2020-10-13 00:23:47 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
  WARN 2020-10-13 00:33:00 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
  WARN 2020-10-13 00:33:00 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-13 22:02:39 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-13 22:02:39 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-13 22:10:48 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-13 22:10:48 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-10-13 22:10:49 - SQL Error: 0, SQLState: 42703
+ERROR 2020-10-13 22:10:49 - ERROR: column auditoriad0_.logid does not exist
+  Posição: 8
+ WARN 2020-10-13 22:13:25 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-10-13 22:13:25 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
