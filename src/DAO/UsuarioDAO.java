@@ -31,6 +31,22 @@ public class UsuarioDAO extends Dao<Usuario> {
         }
         return null;
     }
+    // TEM ERRO
+        public Usuario findByLogin(String criteria) {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        Usuario usuario = null;
+        try {
+            org.hibernate.Query q = sessao.createQuery("from Usuario where login =:criter")
+                    .setParameter("criter", criteria);
+            usuario = (Usuario) q.uniqueResult();//pega um usuário único (resultado único)  
+            return usuario;
+        } catch (HibernateException hibEx) {
+            hibEx.printStackTrace();
+        } finally {
+            sessao.close();
+        }
+        return null;
+    }
 
     public List<Usuario> findAllByDescription(String criteria) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();

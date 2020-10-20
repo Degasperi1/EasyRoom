@@ -5,6 +5,7 @@
  */
 package View;
 
+import DAO.UsuarioDAO;
 import Entidade.Usuario;
 import Utils.Sessao;
 import javax.swing.JOptionPane;
@@ -21,6 +22,8 @@ public class FrmLogin extends javax.swing.JFrame {
     public FrmLogin() {
         initComponents();
         getRootPane().setDefaultButton(btnEntrar);
+//        System.out.println("\n\n\n\n\n::::::::::::::::"
+//                + ""+ (new UsuarioDAO().findByLogin("admin")).getCriacao());
     }
 
     /**
@@ -107,25 +110,36 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         String user = tfdUsuario.getText();
         String password = pfdSenha.getText();
-        if (user.equals("admin") && password.equals("admin")) { //VERIFICAÇÃO AQUI SERÁ PROVENIENTE DO BANCO
-            //LOGOU
-            //SETA O USUÁRIO NA SESSÃO
-            Sessao.getInstance().setUsuario(new Usuario(user, password));
-            Sessao.getInstance().setPermissao(0);
-            //ABRE A TELA INICIAL AGORA
-            new FrmPrincipal().setVisible(true);//VEJA QUE NÃO PASSEI O OBJETO DE SESSÃO
-            this.dispose();
+        Usuario usuarioBusca = new UsuarioDAO().findByLogin(user);
+        if (usuarioBusca != null) {
+            if (usuarioBusca.getSenha().equals(password)) {
+                Sessao.getInstance().setUsuario(new Usuario(user, password));
+                Sessao.getInstance().setPermissao(usuarioBusca.getPermissao());
+                new FrmPrincipal().setVisible(true);
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Verifique suas credênciasA!", "ERRO AO EFETUAR LOGIN",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        
-        else{
-            //LOGOU
-            //SETA O USUÁRIO NA SESSÃO
-            Sessao.getInstance().setUsuario(new Usuario(user, password));
-            Sessao.getInstance().setPermissao(1);
-            //ABRE A TELA INICIAL AGORA
-            new FrmPrincipal().setVisible(true);//VEJA QUE NÃO PASSEI O OBJETO DE SESSÃO
-            this.dispose();
-        }
+
+//        if (user.equals("admin") && password.equals("admin")) { //VERIFICAÇÃO AQUI SERÁ PROVENIENTE DO BANCO
+//            //LOGOU
+//            //SETA O USUÁRIO NA SESSÃO
+//            Sessao.getInstance().setUsuario(new Usuario(user, password));
+//            Sessao.getInstance().setPermissao(0);
+//            //ABRE A TELA INICIAL AGORA
+//            new FrmPrincipal().setVisible(true);//VEJA QUE NÃO PASSEI O OBJETO DE SESSÃO
+//            this.dispose();
+//        } else {
+//            //LOGOU
+//            //SETA O USUÁRIO NA SESSÃO
+//            Sessao.getInstance().setUsuario(new Usuario(user, password));
+//            Sessao.getInstance().setPermissao(1);
+//            //ABRE A TELA INICIAL AGORA
+//            new FrmPrincipal().setVisible(true);//VEJA QUE NÃO PASSEI O OBJETO DE SESSÃO
+//            this.dispose();
+//        }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**

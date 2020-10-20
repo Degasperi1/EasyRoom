@@ -9,6 +9,7 @@ import Utils.Sessao;
 import java.awt.Color;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,13 +22,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
-        getContentPane().setBackground(new Color(238, 107, 38));      
+        getContentPane().setBackground(new Color(238, 107, 38));
+        ArrayList<String> permissoes = new ArrayList<String>();
+        permissoes.add("Administrador");
+        permissoes.add("Balconista");
+        pnlAdmin.setVisible(false);
         //makeFullScreen();
         setExtendedState(FrmPrincipal.MAXIMIZED_BOTH);
-        System.out.println(Sessao.getInstance().getUsuario().getId());
-        
-        pnlAdmin.setVisible(Sessao.getInstance().getPermissao() == 0);
-        
+        //System.out.println(Sessao.getInstance().getUsuario().getId());
+        // System.out.println(Sessao.getInstance().getUsuario().getLogin());
+        System.out.println("Permissão de acesso recebida de número: " + Sessao.getInstance().getPermissao());
+        //verificar se for admin exibe painel
+        if (Sessao.getInstance().getPermissao() == 0) {
+            pnlAdmin.setVisible(true);
+        }
+        ////pnlAdmin.setVisible(Sessao.getInstance().getPermissao() == 0);
+        lblLogin.setText(Sessao.getInstance().getUsuario().getLogin());
+        lblPermissao.setText(permissoes.get(Sessao.getInstance().getPermissao()));
     }
     
     private void makeFullScreen() {
@@ -49,9 +60,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnReport = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         lblUser = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
+        lblPermissao = new javax.swing.JLabel();
         pnlLogo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -96,40 +107,36 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Administrador");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Celso Júnior Degasperi");
-
         lblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/user.png"))); // NOI18N
+
+        lblLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
+        lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblPermissao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblPermissao.setForeground(new java.awt.Color(240, 240, 240));
+        lblPermissao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPermissao.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout pnlUsuarioLayout = new javax.swing.GroupLayout(pnlUsuario);
         pnlUsuario.setLayout(pnlUsuarioLayout);
         pnlUsuarioLayout.setHorizontalGroup(
             pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlUsuarioLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUsuarioLayout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUsuarioLayout.createSequentialGroup()
-                        .addGroup(pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblPermissao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUsuarioLayout.createSequentialGroup()
-                        .addGroup(pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlUsuarioLayout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(44, 44, 44)))
-                        .addGap(20, 20, 20))))
-            .addGroup(pnlUsuarioLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(lblUser)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lblUser)
+                        .addGap(67, 67, 67))))
         );
         pnlUsuarioLayout.setVerticalGroup(
             pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,14 +144,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(lblUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addGap(49, 49, 49)
+                .addComponent(lblLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPermissao, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(btnHome)
                 .addGap(18, 18, 18)
                 .addComponent(btnReport)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 403, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 431, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addGap(44, 44, 44))
         );
@@ -432,7 +439,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnProdutoActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        System.exit(0);
+        //System.exit(0);
+        //Tira as informações da sessão atual
+        Sessao.getInstance().setPermissao(null);
+        Sessao.getInstance().setUsuario(null);
+        this.dispose();
+        new FrmLogin().setVisible(true);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCidadeActionPerformed
@@ -514,10 +526,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnReserva;
     private javax.swing.JButton btnUsuario2;
     private javax.swing.JDesktopPane dskPrincipal;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblLogin;
+    private javax.swing.JLabel lblPermissao;
     private javax.swing.JLabel lblUser;
     private javax.swing.JPanel pnlAdmin;
     private javax.swing.JPanel pnlLogo;
