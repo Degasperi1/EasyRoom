@@ -255,20 +255,18 @@
                           <Component id="btnPessoaFisica" min="-2" pref="173" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="btnUsuario2" min="-2" pref="173" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Component id="btnPessoaJuridica" min="-2" pref="173" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                  <Component id="btnReserva" min="-2" pref="173" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                  <Component id="btnCidade" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                  <Component id="btnProduto" min="-2" pref="173" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="btnPessoaJuridica" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
+                              <Component id="btnUsuario2" alignment="0" min="-2" pref="173" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <Component id="btnReserva" min="-2" pref="173" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="btnCidade" min="-2" pref="170" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="btnProduto" min="-2" pref="173" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="195" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -294,7 +292,7 @@
                   <Component id="btnUsuario2" min="-2" pref="116" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="pnlAdmin" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="80" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
