@@ -77,6 +77,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlAdmin = new javax.swing.JPanel();
         btnLog = new javax.swing.JButton();
         btnAuditoria = new javax.swing.JButton();
+        btnEmail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("EasyRoom");
@@ -332,6 +333,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
+        btnEmail.setBackground(new java.awt.Color(238, 107, 38));
+        btnEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/mail-icon-45.png"))); // NOI18N
+        btnEmail.setText("Enviar E-mail");
+        btnEmail.setToolTipText("");
+        btnEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnEmail.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEmail.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmailActionPerformed(evt);
+            }
+        });
+
         dskPrincipal.setLayer(btnPessoaFisica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnPessoaJuridica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnReserva, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -340,6 +354,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         dskPrincipal.setLayer(btnUsuario2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(btnQuarto, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dskPrincipal.setLayer(pnlAdmin, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dskPrincipal.setLayer(btnEmail, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout dskPrincipalLayout = new javax.swing.GroupLayout(dskPrincipal);
         dskPrincipal.setLayout(dskPrincipalLayout);
@@ -352,17 +367,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(dskPrincipalLayout.createSequentialGroup()
                         .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(53, 53, 53)
-                        .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(dskPrincipalLayout.createSequentialGroup()
+                                .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(dskPrincipalLayout.createSequentialGroup()
                                 .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53)
-                                .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(48, 48, 48)
+                        .addComponent(btnCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(195, Short.MAX_VALUE))
             .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(dskPrincipalLayout.createSequentialGroup()
                     .addGap(84, 84, 84)
@@ -380,10 +398,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(btnPessoaJuridica, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPessoaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
-                .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(pnlAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(dskPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(dskPrincipalLayout.createSequentialGroup()
                     .addGap(234, 234, 234)
@@ -477,6 +497,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         ifrAuditoria.setVisible(true);
     }//GEN-LAST:event_btnAuditoriaActionPerformed
 
+    private void btnEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailActionPerformed
+        IfrEmail ifrEmail = new IfrEmail();
+        dskPrincipal.add(ifrEmail);
+        ifrEmail.setVisible(true);
+    }//GEN-LAST:event_btnEmailActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -515,6 +541,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAuditoria;
     private javax.swing.JButton btnCidade;
+    private javax.swing.JButton btnEmail;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnLogout;
