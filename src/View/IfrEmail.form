@@ -24,6 +24,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="pnlEmail" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="btnCancelar" min="-2" pref="143" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -40,6 +42,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCancelar" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                   <Component id="btnFechar" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
@@ -110,7 +113,7 @@
                       <Component id="lblMsg" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="221" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace pref="62" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -134,7 +137,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblPara">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Para:"/>
+            <Property name="text" type="java.lang.String" value="Para:*"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblAssunto">
@@ -252,6 +255,14 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFecharActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Campos marcados com &apos;*&apos; s&#xe3;o de preenchimento obrigat&#xf3;rio."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

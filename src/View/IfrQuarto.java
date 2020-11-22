@@ -78,6 +78,7 @@ public class IfrQuarto extends javax.swing.JInternalFrame {
         btnCancelar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
 
+        setTitle("Cadastro de Quartos");
         setPreferredSize(new java.awt.Dimension(992, 737));
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/save-30.png"))); // NOI18N

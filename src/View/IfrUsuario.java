@@ -66,7 +66,8 @@ public class IfrUsuario extends javax.swing.JInternalFrame {
         btnFechar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setTitle("Produtos");
+        setResizable(true);
+        setTitle("Cadastro de Usuários");
         setPreferredSize(new java.awt.Dimension(992, 737));
 
         jLabel2.setText("Código:");
