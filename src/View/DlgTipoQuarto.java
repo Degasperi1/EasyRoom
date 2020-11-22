@@ -104,6 +104,7 @@ public class DlgTipoQuarto extends javax.swing.JDialog {
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tipos de Quartos");
 
         jLabel2.setText("Código:");
 

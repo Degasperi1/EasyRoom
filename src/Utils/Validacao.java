@@ -6,6 +6,8 @@ package Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.swing.JFormattedTextField;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
@@ -92,4 +94,16 @@ public class Validacao {
     public static boolean isDigit(String s) {
         return s.matches("[0-9]*");
     }
+
+    public static boolean isValidEmailAddress(String email) {
+    boolean result = true;
+    try {
+        InternetAddress emailAddr = new InternetAddress(email);
+        emailAddr.validate();
+    } catch (AddressException ex) {
+        result = false;
+    }
+    return result;
+}
+    
 }
