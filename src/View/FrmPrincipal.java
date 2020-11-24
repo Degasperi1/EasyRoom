@@ -449,7 +449,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPessoaJuridicaActionPerformed
 
     private void btnReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservaActionPerformed
-        // TODO add your handling code here:
+        IfrReserva ifrReserva = new IfrReserva();
+        dskPrincipal.add(ifrReserva);
+        ifrReserva.setVisible(true);
     }//GEN-LAST:event_btnReservaActionPerformed
 
     private void btnProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutoActionPerformed
