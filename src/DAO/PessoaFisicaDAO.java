@@ -60,6 +60,5 @@ public class PessoaFisicaDAO extends Dao<PessoaFisica> {
             sessao.close();
         }
         return null;
-    }        
-   
+    } 
 }

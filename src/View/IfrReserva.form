@@ -44,7 +44,7 @@
                   <Component id="btnCancelar" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
                   <Component id="btnFechar" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -84,13 +84,18 @@
                                           <Component id="lbNome" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="lbCodigo" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="tfdMostraId" min="-2" pref="59" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="tfdPessoa" min="-2" pref="488" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                              <Component id="tfdMostraId" min="-2" pref="59" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                                              <Component id="lblIDPessoa" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="tfdPessoa" min="-2" pref="414" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="btnBuscarPessoa" pref="162" max="32767" attributes="0"/>
+                                              <Component id="btnBuscarPessoa" pref="132" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -100,19 +105,22 @@
                                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="tfdQuarto" min="-2" pref="484" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="btnBuscarQuarto" pref="165" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="tfdValorDiária" min="-2" pref="134" max="-2" attributes="0"/>
                                                   <Component id="tfdValorTotal" min="-2" pref="134" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                              <Component id="lblIDQuarto" min="-2" pref="40" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="tfdQuarto" min="-2" pref="408" max="-2" attributes="0"/>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="btnBuscarQuarto" pref="165" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -140,6 +148,7 @@
                           <Component id="lbNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnBuscarPessoa" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblIDPessoa" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="pnlData" min="-2" max="-2" attributes="0"/>
@@ -148,6 +157,7 @@
                           <Component id="lbNome1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfdQuarto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnBuscarQuarto" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblIDQuarto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="35" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -323,6 +333,16 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarPessoaActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="lblIDQuarto">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="lblIDPessoa">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

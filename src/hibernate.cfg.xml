@@ -19,5 +19,7 @@
         <mapping class="Entidade.Quarto"/>
         <mapping class="Entidade.Usuario"/>
         <mapping class="Entidade.AuditoriaDados"/>
+        <mapping class="Entidade.Reserva"/>
+        <mapping class="Entidade.ReservaQuarto"/>
     </session-factory>
 </hibernate-configuration>

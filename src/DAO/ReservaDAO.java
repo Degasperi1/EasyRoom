@@ -11,7 +11,7 @@ import org.hibernate.Transaction;
  *
  * @author Degasperi
  */
-public class ReservaDAO {
+public class ReservaDAO extends Dao<Reserva> {
     public Reserva findById(int id) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         try {

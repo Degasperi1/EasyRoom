@@ -11,7 +11,8 @@ import org.hibernate.Transaction;
  *
  * @author Degasperi
  */
-public class ReservaQuartoDAO {
+public class ReservaQuartoDAO extends Dao<ReservaQuarto> {
+
     public ReservaQuarto findById(int id) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         try {
@@ -26,6 +27,27 @@ public class ReservaQuartoDAO {
         return null;
     }
     
+    public boolean saveD(ReservaQuarto object) {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        Integer cod = null;
+        Transaction transacao = null;
+        try {
+            transacao = sessao.beginTransaction();
+            sessao.save(object);
+            transacao.commit();
+            return true;
+        } catch (HibernateException hibEx) {
+            hibEx.printStackTrace();
+            transacao.rollback();
+            Dao.logger.error("Erro no registro: " + hibEx.toString());
+            //Dao.logger.warn("Erro no registro: " + hibEx.toString());
+        } finally {
+            sessao.close();
+        }
+        return false;
+    }
+
+
     public List<ReservaQuarto> findAllByDescription(String criteria) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         List<ReservaQuarto> reservas = null;
