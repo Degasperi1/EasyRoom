@@ -5,9 +5,25 @@
  */
 package View;
 
+import DAO.PessoaFisicaDAO;
+import DAO.QuartoDAO;
+import DAO.ReservaDAO;
+import DAO.ReservaQuartoDAO;
+import Entidade.PessoaFisica;
+import Entidade.Quarto;
+import Entidade.Reserva;
+import Entidade.ReservaQuarto;
 import TableModel.PessoaFisicaTableModel;
+import TableModel.QuartoTableModel;
+import TableModel.ReservaTableModel;
+import Utils.Calendario;
+import Utils.DateUtils;
 import Utils.JTableUtilities;
+import Utils.Sessao;
+import java.time.LocalDate;
+import java.util.Date;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
@@ -18,9 +34,11 @@ import javax.swing.SwingConstants;
 public class IfrReserva extends javax.swing.JInternalFrame {
 
     JDesktopPane dskPrincipal = new JDesktopPane();
-    PessoaFisicaTableModel tableModel = new PessoaFisicaTableModel();
+    ReservaTableModel tableModel = new ReservaTableModel();
     int idEntidade = 0;
     int idPessoaFisica = 0;
+    int idReserva = 0;
+    int idRQ = 0;
 
     public IfrReserva() {
         initComponents();
@@ -30,6 +48,12 @@ public class IfrReserva extends javax.swing.JInternalFrame {
         JTableUtilities.setCellsAlignment(tblPessoa, SwingConstants.CENTER, new int[]{0, 2});
         tblPessoa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//seleção de única linha
         FrmPrincipal frmPrincipal = new FrmPrincipal();
+
+        //datas default
+        this.dcDataInicial.setDate(new Date());
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        this.dcDataFinal.setDate(DateUtils.asDate(tomorrow));
     }
 
     /**
@@ -62,6 +86,8 @@ public class IfrReserva extends javax.swing.JInternalFrame {
         tfdValorDiária = new javax.swing.JTextField();
         btnBuscarQuarto = new javax.swing.JButton();
         btnBuscarPessoa = new javax.swing.JButton();
+        lblIDQuarto = new javax.swing.JTextField();
+        lblIDPessoa = new javax.swing.JTextField();
         pnlConsultar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
@@ -163,6 +189,10 @@ public class IfrReserva extends javax.swing.JInternalFrame {
             }
         });
 
+        lblIDQuarto.setEditable(false);
+
+        lblIDPessoa.setEditable(false);
+
         javax.swing.GroupLayout pnlCadastrarLayout = new javax.swing.GroupLayout(pnlCadastrar);
         pnlCadastrar.setLayout(pnlCadastrarLayout);
         pnlCadastrarLayout.setHorizontalGroup(
@@ -185,11 +215,13 @@ public class IfrReserva extends javax.swing.JInternalFrame {
                                     .addComponent(lbCodigo))
                                 .addGap(48, 48, 48)
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfdMostraId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
-                                        .addComponent(tfdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblIDPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))))
+                                        .addComponent(btnBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                                    .addComponent(tfdMostraId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlCadastrarLayout.createSequentialGroup()
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNome1)
@@ -198,14 +230,16 @@ public class IfrReserva extends javax.swing.JInternalFrame {
                                 .addGap(44, 44, 44)
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
-                                        .addComponent(tfdQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnBuscarQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-                                    .addGroup(pnlCadastrarLayout.createSequentialGroup()
                                         .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfdValorDiária, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(tfdValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(pnlCadastrarLayout.createSequentialGroup()
+                                        .addComponent(lblIDQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(tfdQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btnBuscarQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))))
                         .addGap(149, 149, 149))
                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
                         .addComponent(pnlData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -222,14 +256,16 @@ public class IfrReserva extends javax.swing.JInternalFrame {
                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNome)
                     .addComponent(tfdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscarPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIDPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addComponent(pnlData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNome1)
                     .addComponent(tfdQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscarQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIDQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -365,7 +401,7 @@ public class IfrReserva extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnFechar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -374,10 +410,68 @@ public class IfrReserva extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
+        if (validaCampos()) {
+            ReservaDAO reservaDAO = new ReservaDAO();
+            QuartoDAO quartoDAO = new QuartoDAO();
+            ReservaQuartoDAO rqDAO = new ReservaQuartoDAO();
+            Reserva r = new Reserva();
+            ReservaQuarto rq = new ReservaQuarto();
+            Integer ReservaReturnOfSavedID = null;
+            Integer RQReturnOfSavedID = null;
+            //----------------------------------------------------
+            r.setData(new Date(new Calendario().obterDataAtualDMA()));
+            r.setUsuario(Sessao.getInstance().getUsuario().getId());
+            r.setValorTotal(Double.parseDouble(this.tfdValorTotal.getText()));//verificar depois
+            r.setEntidade(new PessoaFisicaDAO().findById(Integer.parseInt(lblIDPessoa.getText())).getIdEntidade());
+            if (idReserva == 0) {
+                ReservaReturnOfSavedID = reservaDAO.save(r);
+                if (ReservaReturnOfSavedID != null) {
+                    //JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    //limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar reserva", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                String retorno = reservaDAO.update(r);
+                if (retorno == null) {
+                    //JOptionPane.showMessageDialog(null, "Reserva atualizada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    this.idReserva = 0;
+                    // limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar reserva\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            //-------------------------------------------------------------
+            //PK's
+            rq.setId(reservaDAO.findById(ReservaReturnOfSavedID));//id da reserva
+            rq.setQuarto(quartoDAO.findById(Integer.parseInt(lblIDQuarto.getText())));//id quarto
+            //###################################################
+            rq.setDataInicio(dcDataInicial.getDate());
+            rq.setDataFim(dcDataFinal.getDate());
+            if (idRQ == 0) {
+                rqDAO.saveD(rq);
+                if (ReservaReturnOfSavedID != null) {//alterar comparação
+                    JOptionPane.showMessageDialog(null, "Reserva de quarto cadastrada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    //limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao cadastrar reserva de quarto", "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                String retorno = rqDAO.update(rq);
+                if (retorno == null) {
+                    JOptionPane.showMessageDialog(null, "Reserva de quarto atualizada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    this.idRQ = 0;
+                    //limpaCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao atualizar reserva de quarto\nMensagem técnica: " + retorno, "ERRO!", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         this.tableModel.updateData(tfdBuscar.getText());
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -405,12 +499,33 @@ public class IfrReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tfdValorDiáriaActionPerformed
 
     private void btnBuscarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarQuartoActionPerformed
-      
+        // ABRE A JANELA DE BUSCAR UM QUARTO PARA REGISTRO DA RESERVA
+        QuartoTableModel tableModel = new QuartoTableModel();
+        DlgSelecionaObjeto dlgso = new DlgSelecionaObjeto(this, true, "Quarto", tableModel);
+        dlgso.setVisible(true);
     }//GEN-LAST:event_btnBuscarQuartoActionPerformed
 
     private void btnBuscarPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPessoaActionPerformed
-        // TODO add your handling code here:
+        // ABRE A JANELA DE BUSCAR UMA PESSOA PARA REGISTRO DA RESERVA
+        PessoaFisicaTableModel tableModel = new PessoaFisicaTableModel();
+        DlgSelecionaObjeto dlgso = new DlgSelecionaObjeto(this, true, "Pessoa Física", tableModel);
+        dlgso.setVisible(true);
     }//GEN-LAST:event_btnBuscarPessoaActionPerformed
+    public void setFields(Quarto q) {
+        this.lblIDQuarto.setText(q.getId_quarto() + "");
+        this.tfdQuarto.setText(q.getNr_quarto());
+        this.tfdValorDiária.setText(q.getId_tipo_quarto().getVl_reserva() + "");
+        int dias = DateUtils.getDaysBetweenDates(DateUtils.asLocalDate(this.dcDataInicial.getDate()),
+                DateUtils.asLocalDate(this.dcDataFinal.getDate()));
+        double valorTotal = dias * (q.getId_tipo_quarto().getVl_reserva());
+        this.tfdValorTotal.setText(valorTotal + "");
+
+    }
+    public void setFields(PessoaFisica pf) {
+        this.lblIDPessoa.setText(pf.getId() + "");
+        this.tfdPessoa.setText(pf.getNome());
+    }
+
     private void limpaCampos() {
 //        tfdPessoa.setText("");
 //        
@@ -463,6 +578,8 @@ public class IfrReserva extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNome1;
+    private javax.swing.JTextField lblIDPessoa;
+    private javax.swing.JTextField lblIDQuarto;
     private javax.swing.JPanel pnlCadastrar;
     private javax.swing.JPanel pnlConsultar;
     private javax.swing.JPanel pnlData;

@@ -8,6 +8,7 @@ package Utils;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -43,5 +44,10 @@ public class DateUtils {
 
     public static boolean isBefore(LocalDate date, LocalDate compara) {
         return compara.isBefore(date);
+    }
+    
+    public static int getDaysBetweenDates(LocalDate a, LocalDate b) {
+        Period p = Period.between(a, b);     
+        return p.getDays();
     }
 }

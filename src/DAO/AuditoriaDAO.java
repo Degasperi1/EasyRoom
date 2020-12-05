@@ -7,6 +7,9 @@ package DAO;
 
 import Entidade.AuditoriaDados;
 import Utils.HibernateUtil;
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -108,6 +111,60 @@ public class AuditoriaDAO {
             sessao.close();
         }
         return null;
+    }
+
+    public HashMap<String, BigInteger> findNumberByOperations() {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        HashMap<String, BigInteger> map = new HashMap<>();
+        try {
+            Iterator results = sessao.createSQLQuery(
+                    "select operation, count(*) as num \n"
+                    + " from audit_log \n"
+                    + " group by operation ")
+                    .list()
+                    .iterator();
+
+            while (results.hasNext()) {
+                Object[] row = (Object[]) results.next(); // pego a linha inteira
+                map.put(String.valueOf(row[0]), (BigInteger) row[1]);
+            }
+            return map;
+
+        } catch (HibernateException hibEx) {
+            hibEx.printStackTrace();
+        } finally {
+            sessao.close();
+        }
+
+        return null;
+
+    }
+
+    public HashMap<String, BigInteger> findNumberByTables() {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        HashMap<String, BigInteger> map = new HashMap<>();
+        try {
+            Iterator results = sessao.createSQLQuery(
+                    "select table_name, count(*) as num \n"
+                    + "from audit_log \n"
+                    + "group by table_name ")
+                    .list()
+                    .iterator();
+
+            while (results.hasNext()) {
+                Object[] row = (Object[]) results.next(); // pego a linha inteira
+                map.put(String.valueOf(row[0]), (BigInteger) row[1]);
+            }
+            return map;
+
+        } catch (HibernateException hibEx) {
+            hibEx.printStackTrace();
+        } finally {
+            sessao.close();
+        }
+
+        return null;
+
     }
 
 }

@@ -113,7 +113,7 @@ public class FrmLogin extends javax.swing.JFrame {
         Usuario usuarioBusca = new UsuarioDAO().findByLogin(user);
         if (usuarioBusca != null) {
             if (usuarioBusca.getSenha().equals(password)) {
-                Sessao.getInstance().setUsuario(new Usuario(user, password));
+                Sessao.getInstance().setUsuario(usuarioBusca);
                 Sessao.getInstance().setPermissao(usuarioBusca.getPermissao());
                 new FrmPrincipal().setVisible(true);
                 this.dispose();

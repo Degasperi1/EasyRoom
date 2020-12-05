@@ -306,3 +306,111 @@ ERROR 2020-11-07 00:41:58 - ERROR: column usuario0_.ie_permissao does not exist
  WARN 2020-11-23 21:00:14 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
  WARN 2020-11-23 21:01:07 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
  WARN 2020-11-23 21:01:07 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:05:31 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:05:31 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:16:23 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:16:23 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:18:38 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:18:38 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:54:09 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:54:09 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:55:03 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:55:03 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:55:04 - HHH000038: Composite-id class does not override equals(): Entidade.ReservaQuarto
+ WARN 2020-11-30 20:55:04 - HHH000039: Composite-id class does not override hashCode(): Entidade.ReservaQuarto
+ WARN 2020-11-30 20:56:38 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:56:38 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:56:39 - HHH000038: Composite-id class does not override equals(): Entidade.ReservaQuarto
+ WARN 2020-11-30 20:56:39 - HHH000039: Composite-id class does not override hashCode(): Entidade.ReservaQuarto
+ WARN 2020-11-30 20:57:47 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:57:47 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:57:48 - HHH000038: Composite-id class does not override equals(): Entidade.ReservaQuarto
+ WARN 2020-11-30 20:57:48 - HHH000039: Composite-id class does not override hashCode(): Entidade.ReservaQuarto
+ WARN 2020-11-30 20:58:54 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 20:58:54 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 20:58:55 - HHH000038: Composite-id class does not override equals(): Entidade.ReservaQuarto
+ WARN 2020-11-30 20:58:55 - HHH000039: Composite-id class does not override hashCode(): Entidade.ReservaQuarto
+ WARN 2020-11-30 21:00:04 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:00:04 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:00:04 - HHH000038: Composite-id class does not override equals(): Entidade.ReservaQuarto
+ WARN 2020-11-30 21:00:04 - HHH000039: Composite-id class does not override hashCode(): Entidade.ReservaQuarto
+ WARN 2020-11-30 21:04:13 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:04:13 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:06:00 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:06:00 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:18:59 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:18:59 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:19:35 - SQL Error: 0, SQLState: 42804
+ERROR 2020-11-30 21:19:35 - ERROR: column "dt_reserva" is of type date but expression is of type character varying
+  Dica: You will need to rewrite or cast the expression.
+  Posição: 94
+ERROR 2020-11-30 21:19:35 - Erro no registro: org.hibernate.exception.SQLGrammarException: could not execute statement
+ WARN 2020-11-30 21:22:43 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:22:43 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:22:55 - SQL Error: 0, SQLState: 42804
+ERROR 2020-11-30 21:22:55 - ERROR: column "dt_reserva" is of type date but expression is of type character varying
+  Dica: You will need to rewrite or cast the expression.
+  Posição: 94
+ERROR 2020-11-30 21:22:55 - Erro no registro: org.hibernate.exception.SQLGrammarException: could not execute statement
+ WARN 2020-11-30 21:31:38 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:31:38 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:34:58 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:34:58 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:44:00 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:44:00 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:45:34 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:45:34 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-11-30 21:49:24 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-11-30 21:49:24 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 22:24:49 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 22:24:49 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 22:26:50 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 22:26:50 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 22:33:47 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 22:33:47 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 22:37:19 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 22:37:19 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:10:29 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:10:29 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:11:49 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:11:49 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:12:45 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:12:45 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:13:52 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:13:52 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:18:20 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:18:20 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:20:47 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:20:47 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:23:38 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:23:38 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:24:39 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:24:39 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:25:29 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:25:30 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:33:19 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:33:19 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:45:55 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:45:55 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:49:13 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:49:13 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:50:13 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:50:13 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:52:18 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:52:18 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:53:23 - SQL Error: 0, SQLState: 23502
+ERROR 2020-12-04 23:53:23 - ERROR: null value in column "id_usuario_cadastro" violates not-null constraint
+  Detalhe: Failing row contains (8, 2020-04-12, 0.00, null, 1).
+ERROR 2020-12-04 23:53:23 - Erro no registro: org.hibernate.exception.ConstraintViolationException: could not execute statement
+ WARN 2020-12-04 23:54:35 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:54:35 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-04 23:54:44 - SQL Error: 0, SQLState: 23502
+ERROR 2020-12-04 23:54:44 - ERROR: null value in column "id_usuario_cadastro" violates not-null constraint
+  Detalhe: Failing row contains (9, 2020-04-12, 0.00, null, 1).
+ERROR 2020-12-04 23:54:44 - Erro no registro: org.hibernate.exception.ConstraintViolationException: could not execute statement
+ WARN 2020-12-04 23:57:49 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-04 23:57:49 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-05 00:00:34 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-05 00:00:34 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+ WARN 2020-12-05 00:00:59 - HHH000223: Recognized obsolete hibernate namespace http://hibernate.sourceforge.net/. Use namespace http://www.hibernate.org/dtd/ instead. Refer to Hibernate 3.6 Migration Guide!
+ WARN 2020-12-05 00:00:59 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
