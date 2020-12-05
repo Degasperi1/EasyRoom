@@ -9,10 +9,8 @@ import DAO.PessoaFisicaDAO;
 import DAO.QuartoDAO;
 import TableModel.PessoaFisicaTableModel;
 import TableModel.QuartoTableModel;
-import javax.swing.JInternalFrame;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.AbstractTableModel;
 
 /**
  *

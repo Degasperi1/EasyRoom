@@ -90,9 +90,7 @@ public class EntidadeDAO extends Dao<Entidade> {
         } finally {
             sessao.close();
         }
-
         return null;
-
     }
 
 }

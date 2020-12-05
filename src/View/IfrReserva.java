@@ -5,7 +5,7 @@
  */
 package View;
 
-import DAO.EntidadeDAO;
+import DAO.PessoaFisicaDAO;
 import DAO.QuartoDAO;
 import DAO.ReservaDAO;
 import DAO.ReservaQuartoDAO;
@@ -15,12 +15,12 @@ import Entidade.Reserva;
 import Entidade.ReservaQuarto;
 import TableModel.PessoaFisicaTableModel;
 import TableModel.QuartoTableModel;
+import TableModel.ReservaTableModel;
 import Utils.Calendario;
+import Utils.DateUtils;
 import Utils.JTableUtilities;
 import Utils.Sessao;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
@@ -34,7 +34,7 @@ import javax.swing.SwingConstants;
 public class IfrReserva extends javax.swing.JInternalFrame {
 
     JDesktopPane dskPrincipal = new JDesktopPane();
-    PessoaFisicaTableModel tableModel = new PessoaFisicaTableModel();
+    ReservaTableModel tableModel = new ReservaTableModel();
     int idEntidade = 0;
     int idPessoaFisica = 0;
     int idReserva = 0;
@@ -48,6 +48,12 @@ public class IfrReserva extends javax.swing.JInternalFrame {
         JTableUtilities.setCellsAlignment(tblPessoa, SwingConstants.CENTER, new int[]{0, 2});
         tblPessoa.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//seleção de única linha
         FrmPrincipal frmPrincipal = new FrmPrincipal();
+
+        //datas default
+        this.dcDataInicial.setDate(new Date());
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        this.dcDataFinal.setDate(DateUtils.asDate(tomorrow));
     }
 
     /**
@@ -414,13 +420,13 @@ public class IfrReserva extends javax.swing.JInternalFrame {
             Integer RQReturnOfSavedID = null;
             //----------------------------------------------------
             r.setData(new Date(new Calendario().obterDataAtualDMA()));
-            r.setUsuario(1);
-            r.setValorTotal(0D);
-            r.setEntidade(new EntidadeDAO().findById(1));
+            r.setUsuario(Sessao.getInstance().getUsuario().getId());
+            r.setValorTotal(Double.parseDouble(this.tfdValorTotal.getText()));//verificar depois
+            r.setEntidade(new PessoaFisicaDAO().findById(Integer.parseInt(lblIDPessoa.getText())).getIdEntidade());
             if (idReserva == 0) {
                 ReservaReturnOfSavedID = reservaDAO.save(r);
                 if (ReservaReturnOfSavedID != null) {
-                    JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "Reserva cadastrada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
                     //limpaCampos();
                 } else {
                     JOptionPane.showMessageDialog(null, "Erro ao cadastrar reserva", "ERRO!", JOptionPane.ERROR_MESSAGE);
@@ -428,7 +434,7 @@ public class IfrReserva extends javax.swing.JInternalFrame {
             } else {
                 String retorno = reservaDAO.update(r);
                 if (retorno == null) {
-                    JOptionPane.showMessageDialog(null, "Reserva atualizada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "Reserva atualizada com sucesso", "SUCESSO!", JOptionPane.INFORMATION_MESSAGE);
                     this.idReserva = 0;
                     // limpaCampos();
                 } else {
@@ -438,7 +444,7 @@ public class IfrReserva extends javax.swing.JInternalFrame {
             //-------------------------------------------------------------
             //PK's
             rq.setId(reservaDAO.findById(ReservaReturnOfSavedID));//id da reserva
-            rq.setQuarto(quartoDAO.findById(1));//id quarto
+            rq.setQuarto(quartoDAO.findById(Integer.parseInt(lblIDQuarto.getText())));//id quarto
             //###################################################
             rq.setDataInicio(dcDataInicial.getDate());
             rq.setDataFim(dcDataFinal.getDate());
@@ -464,7 +470,9 @@ public class IfrReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        this.tableModel.setPf(new PessoaFisicaDAO().findById(Integer.parseInt(lblIDPessoa.getText())));
         this.tableModel.updateData(tfdBuscar.getText());
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -507,8 +515,13 @@ public class IfrReserva extends javax.swing.JInternalFrame {
     public void setFields(Quarto q) {
         this.lblIDQuarto.setText(q.getId_quarto() + "");
         this.tfdQuarto.setText(q.getNr_quarto());
-    }
+        this.tfdValorDiária.setText(q.getId_tipo_quarto().getVl_reserva() + "");
+        int dias = DateUtils.getDaysBetweenDates(DateUtils.asLocalDate(this.dcDataInicial.getDate()),
+                DateUtils.asLocalDate(this.dcDataFinal.getDate()));
+        double valorTotal = dias * (q.getId_tipo_quarto().getVl_reserva());
+        this.tfdValorTotal.setText(valorTotal + "");
 
+    }
     public void setFields(PessoaFisica pf) {
         this.lblIDPessoa.setText(pf.getId() + "");
         this.tfdPessoa.setText(pf.getNome());

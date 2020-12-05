@@ -17,13 +17,31 @@ import org.hibernate.Transaction;
  * @author Degasperi
  */
 public class PessoaFisicaDAO extends Dao<PessoaFisica> {
-    
+
     public PessoaFisica findById(int id) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         try {
             Transaction transacao = sessao.beginTransaction();
             PessoaFisica retorno = (PessoaFisica) sessao.get(PessoaFisica.class, id);
             return retorno;
+        } catch (HibernateException hibEx) {
+            hibEx.printStackTrace();
+        } finally {
+            sessao.close();
+        }
+        return null;
+    }
+
+    public PessoaFisica findByEntityId(int id) {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        PessoaFisica pessoaFisica = null;
+        try {
+            org.hibernate.Query q = sessao.createQuery("FROM\n"
+                    + "	pessoa_fisica a\n"
+                    + "WHERE\n"
+                    + "	a.id_entidade = "+id);
+            pessoaFisica = (PessoaFisica) q.uniqueResult();
+            return pessoaFisica;
         } catch (HibernateException hibEx) {
             hibEx.printStackTrace();
         } finally {
@@ -60,5 +78,5 @@ public class PessoaFisicaDAO extends Dao<PessoaFisica> {
             sessao.close();
         }
         return null;
-    } 
+    }
 }
