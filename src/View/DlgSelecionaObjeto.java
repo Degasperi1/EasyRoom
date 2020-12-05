@@ -5,6 +5,8 @@
  */
 package View;
 
+import DAO.PessoaFisicaDAO;
+import DAO.QuartoDAO;
 import TableModel.PessoaFisicaTableModel;
 import TableModel.QuartoTableModel;
 import javax.swing.JInternalFrame;
@@ -21,30 +23,35 @@ public class DlgSelecionaObjeto extends javax.swing.JDialog {
     QuartoTableModel tableModelQuarto = null;
     PessoaFisicaTableModel tableModelPessoaFisica = null;
     String tableName = "";
+    IfrReserva parent = null;
+
     public DlgSelecionaObjeto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public DlgSelecionaObjeto(JInternalFrame parent, boolean modal, String tableName,
+    public DlgSelecionaObjeto(IfrReserva parent, boolean modal, String tableName,
             QuartoTableModel tableModel) {
         initComponents();
+        this.parent = parent;
         this.tableName = tableName;
         this.tableModelQuarto = tableModel;
         tblObjeto.setModel(this.tableModelQuarto);
         tblObjeto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TitledBorder tb = (TitledBorder) pnlData.getBorder();
-        tb.setTitle(tb.getTitle()+" "+this.tableName);
+        tb.setTitle(tb.getTitle() + " " + this.tableName);
     }
-        public DlgSelecionaObjeto(JInternalFrame parent, boolean modal, String tableName,
+
+    public DlgSelecionaObjeto(IfrReserva parent, boolean modal, String tableName,
             PessoaFisicaTableModel tableModel) {
         initComponents();
+        this.parent = parent;
         this.tableName = tableName;
         this.tableModelPessoaFisica = tableModel;
         tblObjeto.setModel(this.tableModelPessoaFisica);
         tblObjeto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         TitledBorder tb = (TitledBorder) pnlData.getBorder();
-        tb.setTitle(tb.getTitle()+" "+this.tableName);
+        tb.setTitle(tb.getTitle() + " " + this.tableName);
     }
 
     /**
@@ -124,6 +131,11 @@ public class DlgSelecionaObjeto extends javax.swing.JDialog {
 
         btnSelecionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/checked-30.png"))); // NOI18N
         btnSelecionar.setText("Selecionar");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecionarActionPerformed(evt);
+            }
+        });
 
         btnFechar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Assets/Images/close-window-30.png"))); // NOI18N
         btnFechar.setText("Fechar");
@@ -161,10 +173,10 @@ public class DlgSelecionaObjeto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-      //VERIFICA QUAL É A TABELA
+        //VERIFICA QUAL É A TABELA
         if (this.tableName.equals("Pessoa Física")) {
             this.tableModelPessoaFisica.updateData(tfdBuscar.getText());
-        }else if (this.tableName.equals("Quarto")) {
+        } else if (this.tableName.equals("Quarto")) {
             this.tableModelQuarto.updateData(tfdBuscar.getText());
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -172,6 +184,15 @@ public class DlgSelecionaObjeto extends javax.swing.JDialog {
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecionarActionPerformed
+        if (this.tableName.equals("Pessoa Física")) {
+            this.parent.setFields(new PessoaFisicaDAO().findById((int) tblObjeto.getValueAt(tblObjeto.getSelectedRow(), 0)));
+        } else if (this.tableName.equals("Quarto")) {
+            this.parent.setFields(new QuartoDAO().findById((int) tblObjeto.getValueAt(tblObjeto.getSelectedRow(), 0)));
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnSelecionarActionPerformed
 
     /**
      * @param args the command line arguments

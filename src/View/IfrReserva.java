@@ -9,6 +9,8 @@ import DAO.EntidadeDAO;
 import DAO.QuartoDAO;
 import DAO.ReservaDAO;
 import DAO.ReservaQuartoDAO;
+import Entidade.PessoaFisica;
+import Entidade.Quarto;
 import Entidade.Reserva;
 import Entidade.ReservaQuarto;
 import TableModel.PessoaFisicaTableModel;
@@ -205,34 +207,31 @@ public class IfrReserva extends javax.swing.JInternalFrame {
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNome)
                                     .addComponent(lbCodigo))
+                                .addGap(48, 48, 48)
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
-                                        .addGap(48, 48, 48)
-                                        .addComponent(tfdMostraId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pnlCadastrarLayout.createSequentialGroup()
-                                        .addGap(72, 72, 72)
                                         .addComponent(lblIDPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(btnBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))))
+                                        .addComponent(btnBuscarPessoa, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                                    .addComponent(tfdMostraId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlCadastrarLayout.createSequentialGroup()
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNome1)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6))
+                                .addGap(44, 44, 44)
                                 .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
-                                        .addGap(44, 44, 44)
                                         .addGroup(pnlCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfdValorDiária, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(tfdValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(pnlCadastrarLayout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
                                         .addComponent(lblIDQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfdQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(tfdQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnBuscarQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))))
                         .addGap(149, 149, 149))
@@ -505,6 +504,16 @@ public class IfrReserva extends javax.swing.JInternalFrame {
         DlgSelecionaObjeto dlgso = new DlgSelecionaObjeto(this, true, "Pessoa Física", tableModel);
         dlgso.setVisible(true);
     }//GEN-LAST:event_btnBuscarPessoaActionPerformed
+    public void setFields(Quarto q) {
+        this.lblIDQuarto.setText(q.getId_quarto() + "");
+        this.tfdQuarto.setText(q.getNr_quarto());
+    }
+
+    public void setFields(PessoaFisica pf) {
+        this.lblIDPessoa.setText(pf.getId() + "");
+        this.tfdPessoa.setText(pf.getNome());
+    }
+
     private void limpaCampos() {
 //        tfdPessoa.setText("");
 //        
