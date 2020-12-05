@@ -470,7 +470,6 @@ public class IfrReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        this.tableModel.setPf(new PessoaFisicaDAO().findById(Integer.parseInt(lblIDPessoa.getText())));
         this.tableModel.updateData(tfdBuscar.getText());
         
     }//GEN-LAST:event_btnBuscarActionPerformed

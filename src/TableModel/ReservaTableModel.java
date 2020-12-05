@@ -5,9 +5,7 @@
  */
 package TableModel;
 
-import DAO.PessoaFisicaDAO;
 import DAO.ReservaDAO;
-import Entidade.PessoaFisica;
 import Entidade.Reserva;
 import Utils.Formatacao;
 import java.util.ArrayList;
@@ -21,14 +19,7 @@ import javax.swing.table.AbstractTableModel;
 public class ReservaTableModel extends AbstractTableModel {
 
     private List<Reserva> dados = new ArrayList<>();
-    private String[] colunas = {"ID", "Nome", "Quarto", "TipoQuarto",
-        "Dt. Inicial", "Dt. Final", "Valor Total"
-    };
-    private PessoaFisica pf;
-
-    public void setPf(PessoaFisica pf) {
-        this.pf = pf;
-    }
+    private String[] colunas = {"ID", "Entidade", "Data", "Valor Total"};
 
     public ReservaTableModel() {
         updateData("");
@@ -65,15 +56,11 @@ public class ReservaTableModel extends AbstractTableModel {
             case 0:
                 return dados.get(linha).getId();
             case 1:
-                return new PessoaFisicaDAO().findByEntityId(pf.getId()).getNome();
+                return dados.get(linha).getEntidade().getId();
             case 2:
-                return dados.get(linha).getCpf();
+                return Formatacao.ajustaDataDMA(dados.get(linha).getData().toString());
             case 3:
-                return dados.get(linha).getRg();
-            case 4:
-                return Formatacao.ajustaDataDMA(dados.get(linha).getDataNascimento().toString());
-            case 5:
-                return dados.get(linha).getIdEntidade().getId();
+                return dados.get(linha).getValorTotal();
         }
 
         return null;

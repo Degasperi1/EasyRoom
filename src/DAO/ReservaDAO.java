@@ -32,7 +32,7 @@ public class ReservaDAO extends Dao<Reserva> {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         List<Reserva> reservas = null;
         try {
-            org.hibernate.Query q = sessao.createQuery("from Reserva q WHERE id LIKE '%" + criteria + "%' ORDER BY id");
+            org.hibernate.Query q = sessao.createQuery("from Reserva q WHERE entidade LIKE '%" + criteria + "%' ORDER BY id");
             reservas = q.list();
             return reservas;
         } catch (HibernateException hibEx) {
